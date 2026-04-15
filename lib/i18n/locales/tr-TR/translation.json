@@ -1,0 +1,499 @@
+{
+  "home": {
+    "months": [
+      "Ocak",
+      "Şubat",
+      "Mart",
+      "Nisan",
+      "Mayıs",
+      "Haziran",
+      "Temmuz",
+      "Ağustos",
+      "Eylül",
+      "Ekim",
+      "Kasım",
+      "Aralık"
+    ],
+    "weekNav": ["Bu hafta", "kılınan namazlar"],
+    "barChart": {
+      "error": "Günlük hedef alınamadı",
+      "target": "Hedef",
+      "detaylari": "Detaylar"
+    }
+  },
+  "days": [
+    "Pazar",
+    "Pazartesi",
+    "Salı",
+    "Çarşamba",
+    "Perşembe",
+    "Cuma",
+    "Cumartesi"
+  ],
+  "prayerCard": {
+    "remaining": "kaldı",
+    "toast": {
+      "title": "(Nisa, 103)",
+      "description": "Şüphesiz ki namaz, müminlere vakitleri belirlenmiş bir farzdır."
+    }
+  },
+  "today": "Bugün",
+  "yesterday": "Dün",
+  "info": {
+    "tabs": {
+      "hanefi": "Hanefi",
+      "safii": "Şafii",
+      "maliki": "Maliki",
+      "hanbeli": "Hanbeli"
+    },
+    "hero": {
+      "etiket": "Fıkıh Rehberi",
+      "baslik": "Kaza Namazları Hakkında \nTemel Bilgiler",
+      "altbaslik": "Geçmiş namazları ihya etme ve fıkıh hükümleri hakkında sık sorulan soruların cevapları."
+    },
+    "hangi_namazlar_baslik": "Hangi namazlar kaza edilmelidir?",
+    "nedir_baslik": "Kaza Namazı Nedir?",
+    "nedir_subtitle": "Tanım ve Mahiyet",
+    "faq_title": "SSS",
+    "tertip_title": "Tertip",
+
+    "footer": "Verilen bilgiler Diyanet İşleri Başkanlığı ve güvenilir fıkıh kaynaklarına dayanılarak hazırlanmıştır. Özel durumlar için bir fıkıh alimine danışılması tavsiye edilir.",
+    "hanefi": {
+      "nedir": {
+        "description": "Kaza, vaktinde kılınmayan bir namazın daha sonra kılınmasıdır. Mazeretli veya mazeretsiz kaçırılan farz namazların kazası farz, vitir namazının kazası ise vaciptir.",
+        "second_description": "İslam hukukuna göre, kaçırılan ibadetleri telafi etmek kişinin Allah'a olan borcunu ödeme çabasıdır. Kaza namazı, tövbe ve ibadete dönüş yolculuğudur."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Beş Vakit Farz Namazlar",
+          "active": true
+        },
+        { "icon": "✓", "label": "Vitir Namazı (Vacip)", "active": true },
+        {
+          "icon": "✗",
+          "label": "Sünnet Namazlar (istisnalar hariç)",
+          "active": false
+        },
+        { "icon": "✗", "label": "Cuma ve Bayram Namazları", "active": false }
+      ],
+      "nasil_kilinir": {
+        "title": "Nasıl Kılınır?",
+        "niyet_title": "Niyet",
+        "niyet_body": "\"Allah rızası için vaktinde kaçırdığım ilk öğle namazının kazasını kılmaya niyet ettim.\"",
+        "uygulama_title": "Uygulama",
+        "uygulama_body": "Kaza namazı, normal namaz gibi kılınır. Sadece niyette 'kaza' olduğu belirtilir. Vitir namazının kazası da aynı şekilde vacip olarak kılınır."
+      },
+      "tertip": {
+        "highlight": "altıdan az kaçırılmış namazı olan",
+        "description": "kişiye \"tertibli\" denir.",
+        "body": "Tertibli olanlar, kaza namazlarını vakit namazından önce kılmakla yükümlüdür. Kaçırılan namaz sayısı altıyı aşarsa tertip kalkar ve namazlar herhangi bir sırayla kaza edilebilir."
+      },
+      "kerahat": {
+        "badge": "Mekruh",
+        "title": "Kerahat Vakitleri",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Güneş Doğuşu",
+            "desc": "Güneş ufuk çizgisinden doğduğu andan itibaren ~45 dk. sonra."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "İstiva",
+            "desc": "Güneş tam tepe noktasında durduğu an — öğle ezanından önce kısa sürer."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Güneş Batışı",
+            "desc": "Güneş yaklaşıp ufuk çizgisinin altına battığı zaman (~45 dk.)."
+          }
+        ],
+        "rule_text_raw": "Kaza namazları bu üç vakitte kılınamaz. Gece de dahil olmak üzere diğer tüm vakitlerde kılınabilir. Ancak cenaze namazı kerahat vakitlerinde de kılınır; ertelenmesi caiz değildir."
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "Yolculuk halinde kaza nasıl kılınır?",
+          "answer": "Yolculuk sırasında kaçırılan dört rekatlık farz namazlar, ikamet halindeyken de iki rekat olarak kılınır. Ancak ikamet halinde kaçırılan namaz, yolculuk halindeyken de tam (dört rekat) olarak kılınır."
+        },
+        {
+          "number": "02",
+          "question": "Kaza namazında ezan gerekli midir?",
+          "answer": "Kaza namazında ezan ve ikamet sünnettir. Birden fazla kaza namazı peş peşe kılınıyorsa, ilki için bir ezan, her biri için ayrı ikamet yeterlidir."
+        },
+        {
+          "number": "03",
+          "question": "Kaza namazı cemaatle kılınabilir mi?",
+          "answer": "Evet. Ancak imam ve cemaat aynı namazı kaza etmelidir (örneğin hepsi öğleyi kaza ediyor). Farklı namazları kılanlar birbirine uymaz."
+        }
+      ]
+    },
+    "safii": {
+      "nedir": {
+        "description": "Vaktinde kılınmayan namazın daha sonra kılınmasıdır. Şafii mezhebine göre, mazeretsiz kaçırılan namazların hemen (fılen) kaza edilmesi farzdır.",
+        "second_description": "Şafii fıkhında, kaza borcu olan kişi hayatını idame ettirmek için gerekli olanlar dışında vaktini kaza namazlarıyla geçirmelidir. Bu, kişinin Allah'a olan sadakatinin bir işaretidir."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Beş Vakit Farz Namazlar",
+          "active": true
+        },
+        { "icon": "✓", "label": "Sünnet Namazlar (Rawatib)", "active": true },
+        { "icon": "✗", "label": "Vitir Namazı (Sünnet)", "active": false },
+        { "icon": "✗", "label": "Cuma ve Bayram Namazları", "active": false }
+      ],
+      "nasil_kilinir": {
+        "title": "Nasıl Kılınır?",
+        "niyet_title": "Niyet",
+        "niyet_body": "\"Allah rızası için üzerime farz olan öğle namazının kazasını kılmaya niyet ettim.\"",
+        "uygulama_title": "Uygulama",
+        "uygulama_body": "Normal namaz gibi kılınır. Şafii mezhebinde kaza niyetinde namazın 'farz' olduğunu belirtmek gerekir. Ayrıca tertip (sıra) sünnettir."
+      },
+      "tertip": {
+        "highlight": "Sünnet",
+        "description": "tertibin hükmüdür.",
+        "body": "Şafii mezhebinde namazlar arasında sıra korumak sünnet, farz değildir. Kaza borcu olan kişi dilediği namazdan başlayabilir; ancak mazeretsiz kaçırılan namazları acele etmek esastır."
+      },
+      "kerahat": {
+        "badge": "Mekruh",
+        "title": "Kerahat Vakitleri",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Güneş Doğuşu",
+            "desc": "Güneş doğmaya başladığı andan tamamen doğana kadar geçen süre."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "İstiva",
+            "desc": "Güneş tam tepe noktasında olduğu an."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Güneş Batışı",
+            "desc": "Güneş sararmaya başladığı ve battığı an."
+          }
+        ],
+        "rule_text_raw": "Şafii mezhebine göre kaza namazları sebebi olduğu için bu vakitlerde kılınabilir. Yasak, sebepsiz nafile namazlar içindir. Cenaze namazı da bu vakitlerde kılınabilir."
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "Yolculuk halinde kaza nasıl kılınır?",
+          "answer": "Şafii mezhebinde namaz, kaçırıldığı şartlar altında kaza edilir. Yolculukta kaçırılan namaz iki rekat, ikamette kaçırılan namaz dört rekat olarak kaza edilir."
+        },
+        {
+          "number": "02",
+          "question": "Kaza namazında ezan gerekli midir?",
+          "answer": "Kaza namazında ezan ve ikamet sünnettir. Şafii mezhebinde kaza namazları cemaatle kılınmıyorsa sadece ikamet yeterli görülmüştür."
+        },
+        {
+          "number": "03",
+          "question": "Kaza namazı cemaatle kılınabilir mi?",
+          "answer": "Evet. Şafii mezhebinde namazların aynı olması gerekmez. Örneğin öğleyi kaza eden biri, sabahı kaza eden bir imama uuyabilir."
+        }
+      ]
+    },
+    "maliki": {
+      "nedir": {
+        "description": "Vaktinde kılınmayan namazın daha sonra kılınmasıdır. Maliki mezhebine göre, mazeretsiz kaçırılan namazların hemen (fılen) kaza edilmesi farzdır; nafile veya sünnet namazlarının kazasını ertelemek günahkarlıktır.",
+        "second_description": "Maliki fıkhında, kaza borcu olan kişi sabah sünneti, vitir, bayram namazları ve Tahiyyetü'l-Mescid dışında nafile namazlarla vakit geçiremez. Önce Allah'a olan farz borcunu ödemek esastır."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Beş Vakit Farz Namazlar",
+          "active": true
+        },
+        { "icon": "✓", "label": "Vitir Namazı (Sünnet)", "active": true },
+        { "icon": "✗", "label": "Çoğu Nafile Namazlar", "active": false },
+        { "icon": "✗", "label": "Cuma ve Bayram Namazları", "active": false }
+      ],
+      "nasil_kilinir": {
+        "title": "Nasıl Kılınır?",
+        "niyet_title": "Niyet",
+        "niyet_body": "\"Allah rızası için üzerime farz olan öğle namazının kazasını kılmaya niyet ettim.\"",
+        "uygulama_title": "Uygulama",
+        "body": "Normal namaz gibi kılınır. Maliki mezhebinde kaza namazı, kaçırıldığı şartlar altında kılınır: yolculukta kaçırılan namaz ikametteyken de iki rekat olarak kaza edilir."
+      },
+      "tertip": {
+        "highlight": "dörde kadar kaçırılmış namazı olan",
+        "description": "kişiye \"tertibli\" denir.",
+        "body": "Maliki mezhebinde beş veya daha fazla namaz kaçıran kişi tertip durumunu kaybeder. Tertipli iken kaza namazları vakit namazından önce kılınmalıdır; ancak tertip sünnet, farz değildir."
+      },
+      "kerahat": {
+        "badge": "Mekruh",
+        "title": "Kerahat Vakitleri",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Güneş Doğuşu",
+            "desc": "Güneş doğmaya başladığı andan tamamen doğana kadar — nafile namazlar için haramdır."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "İstiva",
+            "desc": "Güneş tam tepe noktasında olduğu an — nafile namazlar için haramdır."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Güneş Batışı",
+            "desc": "Güneş sararmaya başladığı ve battığı an — nafile namazlar için haram, diğer iki vakitte mekruhtur."
+          }
+        ],
+        "rule_text_raw": "Maliki mezhebine göre kaza namazları kerahat vakitleri dahil tüm vakitlerde kılınabilir. Yasak, sebepsiz nafile namazlar içindir. Temel, şu hadistir: 'Kim bir namazı unutur veya uyuyakalırsa hatırladığında kılsın.'"
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "Yolculuk halinde kaza nasıl kılınır?",
+          "answer": "Maliki mezhebinde namaz, kaçırıldığı şartlar altında kaza edilir. Yolculukta kaçırılan namaz iki rekat, ikamette kaçırılan namaz dört rekat olarak kaza edilir."
+        },
+        {
+          "number": "02",
+          "question": "Kaza namazında ezan gerekli midir?",
+          "answer": "Kaza namazında ezan ve ikamet sünnettir. Birden fazla kaza namazı peş peşe kılınıyorsa, sadece ilki için ezan, her biri için ikamet yeterlidir."
+        },
+        {
+          "number": "03",
+          "question": "Kaza namazı cemaatle kılınabilir mi?",
+          "answer": "Evet, kaza cemaatle kılınabilir. Maliki mezhebinde namazların aynı olması gerekmez; farklı namazları kaza edenler birbirine uuyabilir."
+        }
+      ]
+    },
+    "hanbeli": {
+      "nedir": {
+        "description": "Vaktinde kılınmayan farz namazın daha sonra kılınmasıdır. Hanbeli mezhebine göre, mazeretsiz namazı terk eden kişi küfre düşmüş sayılır; tövbe ettiğinde o namazları kaza etmesi gerekir.",
+        "second_description": "Hanbeli fıkhında, kaza borcu olan kişi zaruri ihtiyaçlar dışında kazaları geciktirmeden kılmalıdır. Nafile namazların kazasını ertelemek haramdır."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Beş Vakit Farz Namazlar",
+          "active": true
+        },
+        { "icon": "✓", "label": "Vitir Namazı (Vacip)", "active": true },
+        {
+          "icon": "✗",
+          "label": "Nafile Namazlar (kaza varken haram)",
+          "active": false
+        },
+        { "icon": "✗", "label": "Cuma ve Bayram Namazları", "active": false }
+      ],
+      "nasil_kilinir": {
+        "niyet_body": "\"Allah rızası için üzerime farz olan sabah namazının kazasını kılmaya niyet ettim.\"",
+        "uygulama_title": "Uygulama",
+        "uygulama_body": "Normal namaz gibi kılınır; sadece niyette 'kaza' belirtilir. Yolculukta kaçırılan namaz kaçırıldığı şartlar altında kaza edilir. Vitir namazının kazası da vacip olarak yerine getirilir."
+      },
+      "tertip": {
+        "highlight": "Farz",
+        "description": "tertibin hükmüdür.",
+        "body": "Hanbeli mezhebinde kaza namazları arasında ve kaza ile vakit namazı arasında sıra korumak farzdır. Ancak vakit namazı kaçırılacaksa kaza tercih edilmez; önce vakit namazı kılınır, sonra kaza edilir."
+      },
+      "kerahat": {
+        "badge": "Mekruh",
+        "title": "Kerahat Vakitleri",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Güneş Doğuşu",
+            "desc": "Güneş doğmaya başladığı andan tamamen doğana kadar — beş vakit namaz kılmak haramdır."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "İstiva",
+            "desc": "Güneş tam tepe noktasında olduğu an — haram vakitlerdendir."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Güneş Batışı",
+            "desc": "Güneş sararmaya başladığı ve battığı an — haram vakitlerdendir."
+          }
+        ],
+        "rule_text_raw": "Hanbeli mezhebine göre kaza namazları kerahat vakitleri dahil tüm vakitlerde kılınabilir; yasak sebepsiz nafile namazlar içindir. Dört mezhebin ittifakına göre kaçırılan namazların kazası hemen (anında) yapılır, mazeretsiz ertelenemez."
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "Yolculuk halinde kaza nasıl kılınır?",
+          "answer": "Hanbeli mezhebinde namaz, kaçırıldığı şartlar altında kaza edilir. Yolculukta kaçırılan namaz iki rekat, ikamette kaçırılan namaz dört rekat olarak kaza edilir."
+        },
+        {
+          "number": "02",
+          "question": "Kaza namazında ezan gerekli midir?",
+          "answer": "Kaza namazında ezan ve ikamet sünnettir. Birden fazla kaza namazı peş peşe kılınıyorsa, ilki için ezan ve her biri için ayrı ikamet tavsiye edilir."
+        },
+        {
+          "number": "03",
+          "question": "Kaza namazı cemaatle kılınabilir mi?",
+          "answer": "Evet. Hanbeli mezhebinde farklı namazları kaza edenler birbirine uuyabilir; imam ve cemaatin aynı namazı kılması gerekmez. Beş vakit namazı cemaatle kılmak Hanbeli'de vaciptir."
+        }
+      ]
+    }
+  },
+  "settings": {
+    "language": "Dil",
+    "appearance": "Görünüm"
+  },
+  "diger": {
+    "bugun": "Bugün",
+    "vakit": "Vakit",
+    "toplam": "Toplam",
+    "kazaKilindi": "Kaza namazı kılındı",
+    "borcEklendi": "Borç eklendi",
+    "vakitler": {
+      "sabah": "Sabah",
+      "ogle": "Öğle",
+      "ikindi": "İkindi",
+      "aksam": "Akşam",
+      "yatsi": "Yatsı",
+      "vitir": "Vitir"
+    },
+    "days": [
+      "Pazar",
+      "Pazartesi",
+      "Salı",
+      "Çarşamba",
+      "Perşembe",
+      "Cuma",
+      "Cumartesi"
+    ],
+    "kazaListesi": "KAZA LİSTESİ",
+    "sonIslem": "Son İşlem",
+    "dun": "Dün",
+    "kilindi": "Kılındı",
+    "eklendi": "Eklendi",
+    "gunler": {
+      "0": "Pzt",
+      "1": "Sal",
+      "2": "Çar",
+      "3": "Per",
+      "4": "Cum",
+      "5": "Cmt",
+      "6": "Paz"
+    }
+  },
+  "headers": {
+    "gecmis": "Geçmiş",
+    "bilgi": "Bilgi Ekranı",
+    "ayarlar": "Ayarlar",
+    "hesaplama": "Hesaplama"
+  },
+  "appearance": {
+    "title": "Görünüm",
+    "interfaceTheme": "ARAYÜZ TEMASI",
+    "light": "Açık",
+    "dark": "Koyu",
+    "system": "Sistem"
+  },
+  "calculation": {
+    "title": "Hesaplama",
+    "error": "Hata",
+    "invalidBirthDate": "Lütfen doğum tarihinizi GG.AA.YYYY formatında girin.",
+    "invalidPrayerDate": "Lütfen namaz başlangıç tarihinizi GG.AA.YYYY formatında girin.",
+    "invalidDateOrder": "Namaz başlangıç tarihi doğum tarihinizden sonra olmalıdır.",
+    "calculationCompleted": "Hesaplama Tamamlandı",
+    "totalDaysSaved": "Toplam {{totalDays}} günlük kaza namazı kaydedildi.",
+    "negativeCountError": "Namaz sayıları negatif olamaz.",
+    "saved": "Kaydedildi",
+    "manualSavedSuccess": "Manuel girişler başarıyla kaydedildi.",
+    "saveError": "Kaydetme sırasında bir hata oluştu. Lütfen tekrar deneyin.",
+    "ok": "Tamam",
+    "autoTab": "Otomatik Hesapla",
+    "manualTab": "Manuel Giriş",
+    "determineDebt": "Borçlarınızı Belirleyin",
+    "determineDebtSubtitle": "İslam hukukuna göre geçmiş namaz borçlarınızı hesaplayarak takibi kolaylaştırın.",
+    "calculateAndSave": "Hesapla ve Kaydet",
+    "save": "Kaydet",
+    "detailedCalculation": "Detaylı Hesaplama",
+    "calculateHint": "Kaza namazlarınızı hesaplamak ve yönetmek için dokunun."
+  },
+  "editSection": {
+    "editPrefix": "",
+    "editHighlight": "Düzenleme Alanı",
+    "subtitle": "Huzur yolculuğunuzu kişiselleştirin. Güvenlik, bildirim ve görünüm ayarlarınızı yönetin."
+  },
+  "notifications": {
+    "title": "Bildirimler",
+    "notifTitle": "Kaza Namazı Hatırlatıcısı 🕌",
+    "notifBody": "Bugünkü kaza namazlarınızı tamamladınız mı?",
+    "activated": "Aktifleştirildi",
+    "activatedMessage": "Bildirimler her gün saat {{time}} için ayarlandı.",
+    "dailyReminders": "Günlük Hatırlatıcılar",
+    "dailyRemindersSubtitle": "Günlük kaza namazlarınız için nazik hatırlatıcılar",
+    "reminderTime": "Hatırlatma Saati",
+    "selectTime": "Saat Seç",
+    "done": "Tamam"
+  },
+  "security": {
+    "title": "Güvenlik",
+    "pinProtection": "PIN Koruması",
+    "pinProtectionSubtitle": "İlerlemenizi 4 haneli kod ile koruyun",
+    "changePin": "PIN Değiştir",
+    "setPin": "PIN Ayarla",
+    "changePinSubtitle": "Mevcut PIN'inizi güncelleyin",
+    "setPinSubtitle": "Uygulama için PIN kodu oluşturun"
+  },
+  "goals": {
+    "title": "Hedeflerim",
+    "dailyGoal": "Günlük Hedef",
+    "dailyGoalHint": "Alimlere göre günde en az bir kaza namazı kılınmalıdır. (Hanefi)",
+    "weeklyGoal": "Haftalık Hedef",
+    "weeklyGoalHint": "Tamamlanacak haftalık miktar"
+  },
+  "autoForm": {
+    "dateOfBirth": "Doğum Tarihi",
+    "startedRegularPrayers": "Düzenli Namaza Başlama",
+    "ageOfPuberty": "Ergenlik Yaşı",
+    "pubertyHint": "Hanefi'ye göre kızlar için en az 9, erkekler için 12",
+    "defaultAge": "12 (Varsayılan)"
+  },
+  "fikhiExemption": {
+    "title": "Fıkhi İstisnalar",
+    "infoLabel": "Bilgi: ",
+    "infoText": "Hayz (adet) ve nifas (lohusalık) dönemlerinde kaçırılan namazlar kaza edilmez. Bu süreler toplam hesaptan düşülür.",
+    "monthlyPeriodDays": "Aylık Adet Günleri",
+    "daysPerMonth": "Gün / Ay",
+    "totalNifasPeriod": "Toplam Lohusalık Günü",
+    "totalDays": "Toplam Gün"
+  },
+  "gender": {
+    "title": "CİNSİYET SEÇİMİ",
+    "male": "Erkek",
+    "female": "Kadın"
+  },
+  "manualForm": {
+    "enterCounts": "NAMAZ SAYILARINI GİRİN",
+    "tip": "İpucu: ",
+    "tipMessage": "Her vakit için bildiğiniz kaza namazlarını ayrı ayrı girebilirsiniz. Bilmiyorsanız 0 bırakın.",
+    "prayerUnit": "namaz"
+  },
+  "pinLock": {
+    "error": "Hata",
+    "incorrectPin": "Girdiğiniz PIN kodu yanlış.",
+    "ok": "Tamam",
+    "openApp": "UYGULAMAYI AÇ"
+  },
+  "pinSetup": {
+    "error": "Hata",
+    "pinMismatch": "PIN kodları eşleşmiyor. Lütfen tekrar deneyin.",
+    "ok": "Tamam",
+    "createPin": "YENİ PIN OLUŞTUR",
+    "confirmPin": "PIN KODUNU DOĞRULA"
+  },
+  "gecmis": "Geçmiş"
+}

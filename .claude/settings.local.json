@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(claude mcp remove:*)",
+      "Bash(claude mcp list-tools:*)",
+      "Bash(claude mcp --help:*)",
+      "Bash(claude mcp get:*)",
+      "Bash(curl:*)",
+      "Bash(node:*)",
+      "Bash(git clone:*)",
+      "Skill(design-md)",
+      "mcp__stitch__get_project",
+      "mcp__stitch__list_screens",
+      "WebFetch(domain:contribution.usercontent.google.com)",
+      "mcp__stitch__get_screen",
+      "Skill(stitch-loop)",
+      "mcp__heroui-native__get_docs",
+      "WebFetch(domain:ui.ahmedbna.com)"
+    ]
+  }
+}

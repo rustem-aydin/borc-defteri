@@ -1,0 +1,499 @@
+{
+  "home": {
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "weekNav": ["This week", "prayers performed"],
+    "barChart": {
+      "error": "Could not fetch daily goal",
+      "target": "Goal",
+      "detaylari": "Details"
+    }
+  },
+  "days": [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ],
+  "prayerCard": {
+    "remaining": "remaining",
+    "toast": {
+      "title": "(An-Nisa, 103)",
+      "description": "Indeed, performing prayers is a duty on the believers at the appointed times."
+    }
+  },
+  "today": "Today",
+  "yesterday": "Yesterday",
+  "info": {
+    "tabs": {
+      "hanefi": "Hanafi",
+      "safii": "Shafi'i",
+      "maliki": "Maliki",
+      "hanbeli": "Hanbali"
+    },
+    "hero": {
+      "etiket": "Fiqh Guide",
+      "baslik": "Basic Information About \nMissed (Qada) Prayers",
+      "altbaslik": "Answers to frequently asked questions about reviving past prayers and their fiqh rulings."
+    },
+    "hangi_namazlar_baslik": "Which prayers need to be made up (qada)?",
+    "nedir_baslik": "What is Qada Prayer?",
+    "nedir_subtitle": "Definition & Nature",
+    "faq_title": "FAQS",
+    "tertip_title": "Order (Tartib)",
+
+    "footer": "The information provided has been prepared based on the Presidency of Religious Affairs and reliable fiqh sources. Consulting a fiqh scholar is recommended for specific situations.",
+    "hanefi": {
+      "nedir": {
+        "description": "Qada refers to performing a prayer that was missed in its prescribed time at a later point. The qada of obligatory prayers missed with or without a valid excuse is fard, while the qada of Witr prayer is wajib.",
+        "second_description": "According to Islamic jurisprudence, making up missed acts of worship is a person's effort to repay their debt to Allah. Qada prayer is a journey of repentance and return to worship."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Five Daily Obligatory Prayers",
+          "active": true
+        },
+        { "icon": "✓", "label": "Witr Prayer (Wajib)", "active": true },
+        {
+          "icon": "✗",
+          "label": "Sunnah Prayers (with exceptions)",
+          "active": false
+        },
+        { "icon": "✗", "label": "Jumu'ah and Eid Prayers", "active": false }
+      ],
+      "nasil_kilinir": {
+        "title": "How to Perform?",
+        "niyet_title": "Intention",
+        "niyet_body": "\"I intend for the sake of Allah to perform qada for the first Dhuhr prayer I missed in its time.\"",
+        "uygulama_title": "Practice",
+        "uygulama_body": "Qada prayer is performed just like a regular prayer. Only the intention specifies that it is 'qada'. The qada of Witr prayer is also performed as wajib in the same manner."
+      },
+      "tertip": {
+        "highlight": "fewer than six missed prayers",
+        "description": "is called a person \"with tartib\".",
+        "body": "Those with tartib are obligated to perform their qada prayers before the current prayer. If the number of missed prayers exceeds six, tartib is lifted and prayers can be made up in any order."
+      },
+      "kerahat": {
+        "badge": "Makruh",
+        "title": "Disliked Times",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Sunrise",
+            "desc": "The moment the sun rises above the horizon and ~45 min. after."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "Istiwa'",
+            "desc": "The moment the sun pauses at its zenith — lasts briefly before Dhuhr adhan."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Sunset",
+            "desc": "When the sun approaches and sets below the horizon (~45 min.)."
+          }
+        ],
+        "rule_text_raw": "Qada prayers cannot be performed during these three times. They can be performed at all other times — including at night. The funeral prayer, however, is performed even during disliked times; postponing it is not permissible."
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "How is qada performed while traveling?",
+          "answer": "Four-rak'ah obligatory prayers missed during travel are performed as two rak'ahs even when resident. A prayer missed while resident, however, is performed in full (four rak'ahs) even when traveling."
+        },
+        {
+          "number": "02",
+          "question": "Is adhan required for qada prayer?",
+          "answer": "Adhan and iqamah are sunnah for qada prayer. If multiple qada prayers are performed consecutively, one adhan for the first and a separate iqamah for each is sufficient."
+        },
+        {
+          "number": "03",
+          "question": "Can qada prayer be performed in congregation?",
+          "answer": "Yes. However, the imam and congregation must be performing the same prayer (e.g., all making up Dhuhr). Those performing different prayers cannot follow one another."
+        }
+      ]
+    },
+    "safii": {
+      "nedir": {
+        "description": "It is the performance of a prayer that was not prayed in its time. According to the Shafi'i school, it is obligatory to make up prayers missed without a valid excuse immediately (fawran).",
+        "second_description": "In Shafi'i fiqh, a person with qada debt must spend their time making up prayers except for necessities to sustain life. This is a mark of the person's faithfulness to Allah."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Five Daily Obligatory Prayers",
+          "active": true
+        },
+        { "icon": "✓", "label": "Sunnah Prayers (Rawatib)", "active": true },
+        { "icon": "✗", "label": "Witr Prayer (Sunnah)", "active": false },
+        { "icon": "✗", "label": "Jumu'ah and Eid Prayers", "active": false }
+      ],
+      "nasil_kilinir": {
+        "title": "How to Perform?",
+        "niyet_title": "Intention",
+        "niyet_body": "\"I intend for the sake of Allah to perform qada for the fard of Dhuhr prayer upon me.\"",
+        "uygulama_title": "Practice",
+        "uygulama_body": "Performed just like a regular prayer. In the Shafi'i school, it is required to specify that the prayer is 'fard' when making the intention for qada. Additionally, tartib (order) is sunnah."
+      },
+      "tertip": {
+        "highlight": "Sunnah",
+        "description": "is the ruling for tartib.",
+        "body": "In the Shafi'i school, maintaining order between prayers is sunnah, not fard. A person with qada debt may start from any prayer they wish; however, hastening to make up prayers missed without excuse is essential."
+      },
+      "kerahat": {
+        "badge": "Makruh",
+        "title": "Disliked Times",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Sunrise",
+            "desc": "The period from when the sun begins to rise until it is fully up."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "Istiwa'",
+            "desc": "The moment the sun is exactly at its zenith."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Sunset",
+            "desc": "The moment the sun begins to turn yellow and set."
+          }
+        ],
+        "rule_text_raw": "According to the Shafi'i school, qada prayers can be performed during these times since they have a reason (sabab). The prohibition applies only to voluntary prayers without a reason. The funeral prayer can also be performed during these times."
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "How is qada performed while traveling?",
+          "answer": "In the Shafi'i school, a prayer is made up under the same conditions it was missed. A prayer missed while traveling is made up as two rak'ahs; one missed while resident is made up as four rak'ahs."
+        },
+        {
+          "number": "02",
+          "question": "Is adhan required for qada prayer?",
+          "answer": "Adhan and iqamah are sunnah for qada prayer. In the Shafi'i school, if qada prayers are not performed in congregation, only iqamah has been considered sufficient."
+        },
+        {
+          "number": "03",
+          "question": "Can qada prayer be performed in congregation?",
+          "answer": "Yes. In the Shafi'i school, it is not required for the prayers to be the same to follow an imam. For example, someone making up Dhuhr can follow an imam making up Fajr."
+        }
+      ]
+    },
+    "maliki": {
+      "nedir": {
+        "description": "It is the performance of a prayer that was not prayed in its time. According to the Maliki school, it is obligatory to immediately (fawran) make up prayers missed without a valid excuse; delaying qada for voluntary or sunnah prayers is sinful.",
+        "second_description": "In Maliki fiqh, a person with qada debt cannot spend time on voluntary prayers except for the Fajr sunnah, Witr, Eid prayers, and Tahiyyat al-Masjid. Paying one's obligatory debt to Allah first is essential."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Five Daily Obligatory Prayers",
+          "active": true
+        },
+        { "icon": "✓", "label": "Witr Prayer (Sunnah)", "active": true },
+        { "icon": "✗", "label": "Most Voluntary Prayers", "active": false },
+        { "icon": "✗", "label": "Jumu'ah and Eid Prayers", "active": false }
+      ],
+      "nasil_kilinir": {
+        "title": "How to Perform?",
+        "niyet_title": "Intention",
+        "niyet_body": "\"I intend for the sake of Allah to perform qada for the fard of Dhuhr prayer upon me.\"",
+        "uygulama_title": "Practice",
+        "uygulama_body": "Performed just like a regular prayer. In the Maliki school, a qada prayer is made up under the same conditions it was missed: a prayer missed while traveling is made up as two rak'ahs even when resident."
+      },
+      "tertip": {
+        "highlight": "up to four missed prayers",
+        "description": "is called a person \"with tartib\".",
+        "body": "In the Maliki school, a person who has missed five or more prayers loses tartib status. While having tartib, qada prayers must be performed before the current prayer; however, tartib is sunnah, not fard."
+      },
+      "kerahat": {
+        "badge": "Makruh",
+        "title": "Disliked Times",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Sunrise",
+            "desc": "From when the sun begins to rise until fully up — forbidden for voluntary prayers."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "Istiwa'",
+            "desc": "The moment the sun is exactly at its zenith — forbidden for voluntary prayers."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Sunset",
+            "desc": "When the sun turns yellow and begins to set — forbidden for voluntary prayers, makruh in the other two times."
+          }
+        ],
+        "rule_text_raw": "According to the Maliki school, qada prayers can be performed at all times including disliked times. The prohibition applies only to voluntary prayers without a reason. The basis is the hadith: 'Whoever forgets a prayer or sleeps through it should perform it when they remember.'"
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "How is qada performed while traveling?",
+          "answer": "In the Maliki school, a prayer is made up under the same conditions it was missed. A prayer missed while traveling is made up as two rak'ahs; one missed while resident is made up as four rak'ahs."
+        },
+        {
+          "number": "02",
+          "question": "Is adhan required for qada prayer?",
+          "answer": "Adhan and iqamah are sunnah for qada prayer. If multiple qada prayers are performed consecutively, adhan for only the first and iqamah for each is sufficient."
+        },
+        {
+          "number": "03",
+          "question": "Can qada prayer be performed in congregation?",
+          "answer": "Yes, qada can be performed in congregation. In the Maliki school, it is not required for prayers to be the same; people making up different prayers can follow one another."
+        }
+      ]
+    },
+    "hanbeli": {
+      "nedir": {
+        "description": "It is the performance of an obligatory prayer that was not performed in its time. According to the Hanbali school, a person who abandons prayer without excuse is considered to have committed kufr; upon repentance, they must make up those prayers.",
+        "second_description": "In Hanbali fiqh, a person with qada debt must perform them without delay except for necessary needs. Delaying qada for voluntary prayers is forbidden."
+      },
+      "hangi_namazlar": [
+        {
+          "icon": "✓",
+          "label": "Five Daily Obligatory Prayers",
+          "active": true
+        },
+        { "icon": "✓", "label": "Witr Prayer (Wajib)", "active": true },
+        {
+          "icon": "✗",
+          "label": "Voluntary Prayers (Forbidden when qada exists)",
+          "active": false
+        },
+        { "icon": "✗", "label": "Jumu'ah and Eid Prayers", "active": false }
+      ],
+      "nasil_kilinir": {
+        "niyet_body": "\"I intend for the sake of Allah to perform qada for the fard of Fajr prayer upon me.\"",
+        "uygulama_title": "Practice",
+        "uygulama_body": "Performed just like a regular prayer; only the intention specifies 'qada'. A prayer missed while traveling is made up under the same conditions it was missed. The qada of Witr prayer is also fulfilled as wajib."
+      },
+      "tertip": {
+        "highlight": "Obligatory (Fard)",
+        "description": "is the ruling for tartib.",
+        "body": "In the Hanbali school, maintaining order between qada prayers and between qada and current prayers is fard. However, if the current prayer will be missed, qada is not prioritized; the current prayer is performed first, then qada is made up."
+      },
+      "kerahat": {
+        "badge": "Makruh",
+        "title": "Disliked Times",
+        "items": [
+          {
+            "key": "dogus",
+            "dot": "#EF9F27",
+            "label": "Sunrise",
+            "desc": "From when the sun begins to rise until fully up — performing the five prayers is forbidden."
+          },
+          {
+            "key": "istiva",
+            "dot": "#854F0B",
+            "label": "Istiwa'",
+            "desc": "The moment the sun is exactly at its zenith — also among the forbidden times."
+          },
+          {
+            "key": "batis",
+            "dot": "#D85A30",
+            "label": "Sunset",
+            "desc": "When the sun turns yellow and begins to set — among the forbidden times."
+          }
+        ],
+        "rule_text_raw": "According to the Hanbali school, qada prayers can be performed at all times including disliked times; the prohibition applies only to voluntary prayers without a reason. By consensus of the four schools, making up missed prayers is immediate (fawri) and cannot be delayed without excuse."
+      },
+      "faq": [
+        {
+          "number": "01",
+          "question": "How is qada performed while traveling?",
+          "answer": "In the Hanbali school, a prayer is made up under the same conditions it was missed. A prayer missed while traveling is made up as two rak'ahs; one missed while resident is made up as four rak'ahs."
+        },
+        {
+          "number": "02",
+          "question": "Is adhan required for qada prayer?",
+          "answer": "Adhan and iqamah are sunnah for qada prayer. If multiple qada prayers are performed consecutively, adhan for the first and a separate iqamah for each is recommended."
+        },
+        {
+          "number": "03",
+          "question": "Can qada prayer be performed in congregation?",
+          "answer": "Yes. In the Hanbali school, those making up different prayers can follow one another; it is not required for the imam and congregation to be performing the same prayer. Performing the five prayers in congregation is wajib in the Hanbali school."
+        }
+      ]
+    }
+  },
+  "settings": {
+    "language": "Language",
+    "appearance": "Appearance"
+  },
+  "diger": {
+    "bugun": "Today",
+    "vakit": "Time",
+    "toplam": "Total",
+    "kazaKilindi": "Missed prayer performed",
+    "borcEklendi": "Debt added",
+    "vakitler": {
+      "sabah": "Fajr",
+      "ogle": "Dhuhr",
+      "ikindi": "Asr",
+      "aksam": "Maghrib",
+      "yatsi": "Isha",
+      "vitir": "Witr"
+    },
+    "days": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "kazaListesi": "MISSED PRAYERS LIST",
+    "sonIslem": "Last Activity",
+    "dun": "Yesterday",
+    "kilindi": "Performed",
+    "eklendi": "Added",
+    "gunler": {
+      "0": "Mon",
+      "1": "Tue",
+      "2": "Wed",
+      "3": "Thu",
+      "4": "Fri",
+      "5": "Sat",
+      "6": "Sun"
+    }
+  },
+  "headers": {
+    "gecmis": "History",
+    "bilgi": "Info Screen",
+    "ayarlar": "Settings",
+    "hesaplama": "Calculation"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "interfaceTheme": "INTERFACE THEME",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System"
+  },
+  "calculation": {
+    "title": "Calculation",
+    "error": "Error",
+    "invalidBirthDate": "Please enter your date of birth in DD.MM.YYYY format.",
+    "invalidPrayerDate": "Please enter your prayer start date in DD.MM.YYYY format.",
+    "invalidDateOrder": "The prayer start date must be after your date of birth.",
+    "calculationCompleted": "Calculation Completed",
+    "totalDaysSaved": "A total of {{totalDays}} days of missed prayers have been saved.",
+    "negativeCountError": "Prayer counts cannot be negative.",
+    "saved": "Saved",
+    "manualSavedSuccess": "Manual entries saved successfully.",
+    "saveError": "An error occurred while saving. Please try again.",
+    "ok": "OK",
+    "autoTab": "Auto Calculate",
+    "manualTab": "Manual Entry",
+    "determineDebt": "Determine Missed Prayers",
+    "determineDebtSubtitle": "Facilitate tracking by calculating your past prayer debts according to Islamic jurisprudence.",
+    "calculateAndSave": "Calculate & Save",
+    "save": "Save",
+    "detailedCalculation": "Detailed Calculation",
+    "calculateHint": "Tap to calculate and manage your missed prayers."
+  },
+  "editSection": {
+    "editPrefix": "Edit ",
+    "editHighlight": "Area",
+    "subtitle": "Personalize your peace journey. Manage your security, notification, and appearance settings."
+  },
+  "notifications": {
+    "title": "Notifications",
+    "notifTitle": "Missed Prayer Reminder 🕌",
+    "notifBody": "Have you completed your daily missed prayers?",
+    "activated": "Activated",
+    "activatedMessage": "Notifications set for every day at {{time}}.",
+    "dailyReminders": "Daily Reminders",
+    "dailyRemindersSubtitle": "Gentle reminders for your daily missed prayers",
+    "reminderTime": "Reminder Time",
+    "selectTime": "Select Time",
+    "done": "Done"
+  },
+  "security": {
+    "title": "Security",
+    "pinProtection": "PIN Protection",
+    "pinProtectionSubtitle": "Protect your progress with a 4-digit code",
+    "changePin": "Change PIN",
+    "setPin": "Set PIN",
+    "changePinSubtitle": "Update your current PIN",
+    "setPinSubtitle": "Create a PIN code for the app"
+  },
+  "goals": {
+    "title": "My Goals",
+    "dailyGoal": "Daily Goal",
+    "dailyGoalHint": "According to scholars, at least one daily missed prayer should be performed. (Hanafi)",
+    "weeklyGoal": "Weekly Goal",
+    "weeklyGoalHint": "Weekly amount to complete"
+  },
+  "autoForm": {
+    "dateOfBirth": "Date of Birth",
+    "startedRegularPrayers": "Started Regular Prayers",
+    "ageOfPuberty": "Age of Puberty",
+    "pubertyHint": "Minimum 9 years for girls, 12 for boys in Hanafi",
+    "defaultAge": "12 (Default)"
+  },
+  "fikhiExemption": {
+    "title": "Fiqhi Exemptions",
+    "infoLabel": "Info: ",
+    "infoText": "Prayers missed during menstruation (hayz) and postnatal bleeding (nifas) do not need to be made up. These periods are deducted from the total calculation.",
+    "monthlyPeriodDays": "Monthly Menstruation Days",
+    "daysPerMonth": "Days / Month",
+    "totalNifasPeriod": "Total Postnatal Days",
+    "totalDays": "Total Days"
+  },
+  "gender": {
+    "title": "GENDER SELECTION",
+    "male": "Male",
+    "female": "Female"
+  },
+  "manualForm": {
+    "enterCounts": "ENTER PRAYER COUNTS",
+    "tip": "Tip: ",
+    "tipMessage": "You can enter the missed prayers you know for each time separately. If you don't know, leave it as 0.",
+    "prayerUnit": "prayers"
+  },
+  "pinLock": {
+    "error": "Error",
+    "incorrectPin": "The PIN you entered is incorrect.",
+    "ok": "OK",
+    "openApp": "OPEN THE APP"
+  },
+  "pinSetup": {
+    "error": "Error",
+    "pinMismatch": "PIN codes do not match. Please try again.",
+    "ok": "OK",
+    "createPin": "CREATE NEW PIN",
+    "confirmPin": "CONFIRM PIN CODE"
+  },
+  "gecmis": "History"
+}

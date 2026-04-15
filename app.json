@@ -1,48 +1,74 @@
 {
   "expo": {
-    "name": "borc-defteri",
+    "name": "Akıllı Kaza Namazı Rehberi",
     "slug": "borc-defteri",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/logo1.png",
     "scheme": "borcdefteri",
     "userInterfaceStyle": "automatic",
+
+    "build": {
+      "production": {
+        "android": {
+          "buildType": "app-bundle"
+        }
+      }
+    },
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
-        "backgroundImage": "./assets/images/android-icon-background.png",
-        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+        "backgroundColor": "#f7faf9",
+        "foregroundImage": "./assets/logo1.png",
+        "backgroundImage": "./assets/logo1.png",
+        "monochromeImage": "./assets/logo1.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.rustem_aydin.borcdefteri"
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/logo1.png"
     },
     "plugins": [
       "expo-router",
+      "expo-sqlite",
+      "expo-secure-store",
+      "@react-native-community/datetimepicker",
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/logo.png",
+          "color": "#f7faf9"
+        }
+      ],
+      "expo-localization",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff",
+          "backgroundColor": "#232323",
+          "image": "./assets/logo1.png",
           "dark": {
+            "image": "./assets/logo1.png",
             "backgroundColor": "#000000"
-          }
+          },
+          "imageWidth": 200
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "ac72a5b6-e3d6-486d-82c9-a356abff794c"
+      }
     }
   }
 }
