@@ -3,8 +3,15 @@ import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
 import { MaterialIcons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect, useState } from "react";
-import { DeviceEventEmitter, Text, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Animated,
+  DeviceEventEmitter,
+  Easing,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 interface WeekNavigatorProps {
   dateRangeStr: string;
@@ -13,6 +20,34 @@ interface WeekNavigatorProps {
   todayDayIdx: number;
   onPrevWeek: () => void;
   onNextWeek: () => void;
+  loading?: boolean;
+}
+
+function SkeletonPulse({ style }: { style: any }) {
+  const opacity = useRef(new Animated.Value(0.3)).current;
+
+  useEffect(() => {
+    const animation = Animated.loop(
+      Animated.sequence([
+        Animated.timing(opacity, {
+          toValue: 0.7,
+          duration: 800,
+          easing: Easing.ease,
+          useNativeDriver: true,
+        }),
+        Animated.timing(opacity, {
+          toValue: 0.3,
+          duration: 800,
+          easing: Easing.ease,
+          useNativeDriver: true,
+        }),
+      ]),
+    );
+    animation.start();
+    return () => animation.stop();
+  }, [opacity]);
+
+  return <Animated.View style={[style, { opacity }]} />;
 }
 
 export function WeekNavigator({
@@ -20,6 +55,7 @@ export function WeekNavigator({
   weeklyTotal,
   onPrevWeek,
   onNextWeek,
+  loading = false,
 }: WeekNavigatorProps) {
   const styles = useStyles();
   const { colors: C } = useTheme();
@@ -47,6 +83,24 @@ export function WeekNavigator({
       subscription.remove();
     };
   }, []);
+
+  if (loading) {
+    return (
+      <View style={styles.card}>
+        <View style={styles.dateRow}>
+          <SkeletonPulse style={styles.skeletonIcon} />
+          <View style={{ alignItems: "center", gap: 8 }}>
+            <SkeletonPulse style={styles.skeletonDate} />
+            <SkeletonPulse style={styles.skeletonSubtitle} />
+          </View>
+          <SkeletonPulse style={styles.skeletonIcon} />
+        </View>
+        <View style={styles.progressContainer}>
+          <SkeletonPulse style={styles.skeletonProgress} />
+        </View>
+      </View>
+    );
+  }
 
   const safeTotal = Number(weeklyTotal) || 0;
   const isTargetReached = safeTotal >= weeklyTarget;
@@ -150,5 +204,30 @@ const useStyles = makeStyles((C) => ({
   progressFill: {
     height: "100%",
     borderRadius: 10,
+  },
+  // Skeleton styles
+  skeletonIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: C.surfaceContainerHigh,
+  },
+  skeletonDate: {
+    width: 140,
+    height: 22,
+    borderRadius: 6,
+    backgroundColor: C.surfaceContainerHigh,
+  },
+  skeletonSubtitle: {
+    width: 100,
+    height: 14,
+    borderRadius: 4,
+    backgroundColor: C.surfaceContainerHigh,
+  },
+  skeletonProgress: {
+    height: 6,
+    borderRadius: 10,
+    width: "100%",
+    backgroundColor: C.surfaceContainerHigh,
   },
 }));

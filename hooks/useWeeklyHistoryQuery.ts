@@ -22,7 +22,7 @@ export function useWeeklyHistoryQuery(startOfWeek: Date, endOfWeek: Date) {
         islem: number;
         vakit_id: string;
       }>(
-        "SELECT * FROM history_logs WHERE tarih >= ? AND tarih <= ? AND islem < 0",
+        "SELECT tarih, islem, vakit_id FROM history_logs WHERE tarih >= ? AND tarih <= ? AND islem < 0 ORDER BY tarih ASC;",
         [startOfWeek.toISOString(), endOfWeek.toISOString()],
       );
       // 'as string[]' ekleyerek TS'i ikna ediyoruz

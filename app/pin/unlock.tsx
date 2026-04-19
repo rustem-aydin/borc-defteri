@@ -58,10 +58,10 @@ export default function PinUnlock() {
       <View style={styles.header}>
         <View style={styles.logoRow}>
           <Image
-            style={{ width: 120, height: 120 }}
+            style={{ width: 120, height: 120, borderRadius: 20 }}
             source={require("@/assets/logo1.png")}
             contentFit="contain"
-          />{" "}
+          />
         </View>
       </View>
 
@@ -111,6 +111,8 @@ export default function PinUnlock() {
           ))}
         </View>
       </View>
+      <View style={styles.blobTopRight} pointerEvents="none" />
+      <View style={styles.blobBottomLeft} pointerEvents="none" />
     </SafeAreaView>
   );
 }
@@ -212,6 +214,26 @@ const useStyles = makeStyles((C) => ({
     marginTop: 48,
     alignItems: "center",
     gap: 12,
+  },
+  blobTopRight: {
+    position: "absolute",
+    top: 80,
+    right: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(162,240,238,0.12)",
+    zIndex: -1,
+  },
+  blobBottomLeft: {
+    position: "absolute",
+    bottom: -120,
+    left: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(205,232,231,0.12)",
+    zIndex: -1,
   },
   biometricButton: {
     width: 56,

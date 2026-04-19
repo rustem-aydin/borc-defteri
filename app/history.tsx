@@ -3,18 +3,15 @@ import { HistoryList } from "@/components/screens/history/HistoryList";
 import { makeStyles } from "@/hooks/make-styles";
 import { useHistoryQuery } from "@/hooks/useHistoryQuery";
 import { i18n } from "@/lib/i18n";
-import { Tabs } from "expo-router";
 import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HistoryScreen() {
   const styles = useStyles();
   const { data, isLoading } = useHistoryQuery();
-  const insets = useSafeAreaInsets();
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top }]}>
-      <Tabs.Screen options={{ headerShown: false }} />
+    <SafeAreaView style={[styles.container]}>
       <Header title={i18n.t("gecmis")} />
       <View style={{ flex: 1 }}>
         <HistoryList
@@ -23,7 +20,9 @@ export default function HistoryScreen() {
           isLoading={isLoading}
         />
       </View>
-    </View>
+      <View style={styles.blobTopRight} pointerEvents="none" />
+      <View style={styles.blobBottomLeft} pointerEvents="none" />
+    </SafeAreaView>
   );
 }
 
@@ -31,5 +30,25 @@ const useStyles = makeStyles((C) => ({
   container: {
     flex: 1,
     backgroundColor: C.surface,
+  },
+  blobTopRight: {
+    position: "absolute",
+    top: -80,
+    right: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(162,240,238,0.12)",
+    zIndex: -1,
+  },
+  blobBottomLeft: {
+    position: "absolute",
+    bottom: -120,
+    left: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(205,232,231,0.12)",
+    zIndex: -1,
   },
 }));

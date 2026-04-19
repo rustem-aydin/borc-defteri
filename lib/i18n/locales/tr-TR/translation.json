@@ -292,6 +292,8 @@
         { "icon": "✗", "label": "Cuma ve Bayram Namazları", "active": false }
       ],
       "nasil_kilinir": {
+        "title": "Nasıl Kılınır?",
+        "niyet_title": "Niyet",
         "niyet_body": "\"Allah rızası için üzerime farz olan sabah namazının kazasını kılmaya niyet ettim.\"",
         "uygulama_title": "Uygulama",
         "uygulama_body": "Normal namaz gibi kılınır; sadece niyette 'kaza' belirtilir. Yolculukta kaçırılan namaz kaçırıldığı şartlar altında kaza edilir. Vitir namazının kazası da vacip olarak yerine getirilir."
@@ -427,6 +429,11 @@
     "editHighlight": "Düzenleme Alanı",
     "subtitle": "Huzur yolculuğunuzu kişiselleştirin. Güvenlik, bildirim ve görünüm ayarlarınızı yönetin."
   },
+  "vitr": {
+    "title": "Vitr Ayarları",
+    "countVitr": "Vitr Say",
+    "countVitrSubtitle": "Vitr namazını kaza listesinde göster"
+  },
   "notifications": {
     "title": "Bildirimler",
     "notifTitle": "Kaza Namazı Hatırlatıcısı 🕌",
@@ -451,7 +458,7 @@
   "goals": {
     "title": "Hedeflerim",
     "dailyGoal": "Günlük Hedef",
-    "dailyGoalHint": "Alimlere göre günde en az bir kaza namazı kılınmalıdır. (Hanefi)",
+    "dailyGoalHint": "En az bir günlük kaza namazı kılınmalıdır.(Hanefi)",
     "weeklyGoal": "Haftalık Hedef",
     "weeklyGoalHint": "Tamamlanacak haftalık miktar"
   },

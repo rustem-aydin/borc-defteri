@@ -5,6 +5,7 @@ import { HeroSection } from "@/components/screens/settings/HeroSection";
 import { NotificationsSection } from "@/components/screens/settings/NotificationsSection";
 import { SecuritySection } from "@/components/screens/settings/SecuritySection";
 import { TargetSection } from "@/components/screens/settings/Targets";
+import { VitrSection } from "@/components/screens/settings/VitrSection";
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import { ScrollView, View } from "react-native";
@@ -24,14 +25,17 @@ export default function SettingsScreen() {
       >
         <HeroSection />
         <View style={styles.sections}>
-          <AppearanceSection />
+          <VitrSection />
           <TargetSection />
           {/* <LanguageSection /> */}
+          <AppearanceSection />
           <SecuritySection />
           <NotificationsSection />
           <CalculationSection />
         </View>
       </ScrollView>
+      <View style={styles.blobTopRight} pointerEvents="none" />
+      <View style={styles.blobBottomLeft} pointerEvents="none" />
     </SafeAreaView>
   );
 }
@@ -51,5 +55,25 @@ const useStyles = makeStyles((C) => ({
   },
   sections: {
     gap: 32,
+  },
+  blobTopRight: {
+    position: "absolute",
+    top: -80,
+    right: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(162,240,238,0.12)",
+    zIndex: -1,
+  },
+  blobBottomLeft: {
+    position: "absolute",
+    bottom: -120,
+    left: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(205,232,231,0.12)",
+    zIndex: -1,
   },
 }));

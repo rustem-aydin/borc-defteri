@@ -2,6 +2,7 @@ import { AppButton } from "@/components/ui/prressable";
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import { MaterialIcons } from "@expo/vector-icons";
+import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Alert, Pressable, Text, View } from "react-native";
@@ -76,9 +77,11 @@ export default function PinSetup() {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
         <View style={styles.logoRow}>
-          {/* İkon rengi için styles._colors kullanıldı */}
-          <MaterialIcons name="lock" size={24} color={styles._colors.primary} />
-          <Text style={styles.logoText}>Sükûn</Text>
+          <Image
+            style={{ width: 120, height: 120, borderRadius: 20 }}
+            source={require("@/assets/logo1.png")}
+            contentFit="contain"
+          />
         </View>
       </View>
 
@@ -127,6 +130,8 @@ export default function PinSetup() {
 
         <View style={styles.bottomSpacer} />
       </View>
+      <View style={styles.blobTopRight} pointerEvents="none" />
+      <View style={styles.blobBottomLeft} pointerEvents="none" />
     </SafeAreaView>
   );
 }
@@ -139,11 +144,10 @@ const useStyles = makeStyles((C) => ({
   header: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center", // "space-between" yerine
     alignItems: "center",
     paddingHorizontal: 32,
-    marginTop: 16,
-    height: 64,
+    marginTop: 64,
   },
   logoRow: {
     flexDirection: "row",
@@ -192,6 +196,26 @@ const useStyles = makeStyles((C) => ({
     backgroundColor: C.primary,
     borderWidth: 3,
     borderColor: C.primaryContainer, // Aktif noktada hafif bir halka efekti
+  },
+  blobTopRight: {
+    position: "absolute",
+    top: 0,
+    right: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(162,240,238,0.12)",
+    zIndex: -1,
+  },
+  blobBottomLeft: {
+    position: "absolute",
+    bottom: 0,
+    left: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(205,232,231,0.12)",
+    zIndex: -1,
   },
   dotInactive: {
     width: 14,

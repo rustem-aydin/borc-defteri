@@ -2,10 +2,10 @@
   "expo": {
     "name": "Akıllı Kaza Namazı Rehberi",
     "slug": "borc-defteri",
-    "version": "1.0.4",
+    "scheme": "akillikazanamazirehberi",
+    "version": "1.0.6",
     "orientation": "portrait",
-    "icon": "./assets/logo1.png",
-    "scheme": "borcdefteri",
+    "icon": "./assets/logo.png",
     "userInterfaceStyle": "automatic",
 
     "build": {
@@ -15,25 +15,27 @@
         }
       }
     },
-    "newArchEnabled": true,
+
     "ios": {
       "supportsTablet": true
     },
+
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#f7faf9",
         "foregroundImage": "./assets/logo1.png",
-        "backgroundImage": "./assets/logo1.png",
-        "monochromeImage": "./assets/logo1.png"
+        "monochromeImage": "./assets/logo-mono.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "package": "com.rustem_aydin.borcdefteri"
+      "predictiveBackGestureEnabled": true,
+      "package": "com.rustem_aydin.akillikazanamazirehberi"
     },
+
     "web": {
       "output": "static",
       "favicon": "./assets/logo1.png"
     },
+
     "plugins": [
       "expo-router",
       "expo-sqlite",
@@ -42,7 +44,7 @@
       [
         "expo-notifications",
         {
-          "icon": "./assets/logo.png",
+          "icon": "./assets/logo1.png",
           "color": "#f7faf9"
         }
       ],
@@ -52,18 +54,16 @@
         {
           "backgroundColor": "#232323",
           "image": "./assets/logo1.png",
-          "dark": {
-            "image": "./assets/logo1.png",
-            "backgroundColor": "#000000"
-          },
           "imageWidth": 200
         }
       ]
     ],
+
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
     },
+
     "extra": {
       "router": {},
       "eas": {

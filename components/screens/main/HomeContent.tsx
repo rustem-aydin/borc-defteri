@@ -1,8 +1,8 @@
 // components/screens/main/HomeContent.tsx
 import LastPrayer from "@/components/screens/main/LastPrayer";
 import { makeStyles } from "@/hooks/make-styles";
-import React, { memo, useEffect, useRef } from "react";
-import { Animated, ScrollView } from "react-native";
+import React, { memo } from "react";
+import { ScrollView, View } from "react-native";
 import PrayerSection from "./PrayerSection";
 import WeeklySection from "./WeeklySection";
 
@@ -20,20 +20,9 @@ interface HomeContentProps {
 
 function HomeContent({ weekData, onPrevWeek, onNextWeek }: HomeContentProps) {
   const styles = useStyles();
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    // InteractionManager yerine basit bir fade-in.
-    // Bu, ekranın hemen görünmesini sağlar.
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 250, // Daha hızlı ve akıcı
-      useNativeDriver: true,
-    }).start();
-  }, []);
 
   return (
-    <Animated.View style={[styles.container, { opacity: fadeAnim }]}>
+    <View style={[styles.container]}>
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -55,7 +44,7 @@ function HomeContent({ weekData, onPrevWeek, onNextWeek }: HomeContentProps) {
 
         <PrayerSection />
       </ScrollView>
-    </Animated.View>
+    </View>
   );
 }
 

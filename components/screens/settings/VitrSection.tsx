@@ -2,35 +2,40 @@ import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
-import React from "react";
-import { Pressable, Text, View } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import React, { useCallback, useEffect, useState } from "react";
+import { DeviceEventEmitter, Switch, Text, View } from "react-native";
 
-export function CalculationSection() {
+export const VITR_ENABLED_KEY = "@vitr_enabled";
+
+export function VitrSection() {
   const styles = useStyles();
   const rowStyles = useRowStyles();
   const { colors: C } = useTheme();
-  const router = useRouter();
+  const [vitrEnabled, setVitrEnabled] = useState(true);
+
+  useEffect(() => {
+    async function load() {
+      const stored = await AsyncStorage.getItem(VITR_ENABLED_KEY);
+      setVitrEnabled(stored === null ? true : stored === "true");
+    }
+    load();
+  }, []);
+
+  const handleToggle = useCallback(async (v: boolean) => {
+    setVitrEnabled(v);
+    await AsyncStorage.setItem(VITR_ENABLED_KEY, v ? "true" : "false");
+    DeviceEventEmitter.emit("VitrUpdated");
+  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.sectionHeader}>
-        <MaterialIcons
-          name="format-list-numbered"
-          size={22}
-          color={C.primary}
-        />
-        <Text style={styles.sectionTitle}>{i18n.t(`calculation.title`)}</Text>
+        <MaterialIcons name="view-column" size={22} color={C.primary} />
+        <Text style={styles.sectionTitle}>{i18n.t(`vitr.title`)}</Text>
       </View>
-
       <View style={styles.card}>
-        <Pressable
-          onPress={() => router.push("/calculate")}
-          style={({ pressed }) => [
-            rowStyles.container,
-            pressed && rowStyles.containerPressed,
-          ]}
-        >
+        <View style={rowStyles.container}>
           <View style={rowStyles.left}>
             <View
               style={[
@@ -39,26 +44,26 @@ export function CalculationSection() {
               ]}
             >
               <MaterialIcons
-                name="calculate"
+                name="check-circle"
                 size={20}
                 color={C.onPrimaryContainer}
               />
             </View>
             <View style={rowStyles.textWrap}>
-              <Text style={rowStyles.title}>
-                {i18n.t(`calculation.detailedCalculation`)}
-              </Text>
+              <Text style={rowStyles.title}>{i18n.t(`vitr.countVitr`)}</Text>
               <Text style={rowStyles.subtitle}>
-                {i18n.t(`calculation.calculateHint`)}
+                {i18n.t(`vitr.countVitrSubtitle`)}
               </Text>
             </View>
           </View>
-          <MaterialIcons
-            name="chevron-right"
-            size={22}
-            color={C.onSurfaceVariant}
+          <Switch
+            value={vitrEnabled}
+            onValueChange={handleToggle}
+            trackColor={{ false: C.surfaceContainerHighest, true: C.primary }}
+            thumbColor={C.surfaceContainerLowest}
+            ios_backgroundColor={C.surfaceContainerHighest}
           />
-        </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -71,9 +76,6 @@ const useRowStyles = makeStyles((C) => ({
     justifyContent: "space-between",
     paddingHorizontal: 24,
     paddingVertical: 20,
-  },
-  containerPressed: {
-    backgroundColor: C.surfaceContainerLow,
   },
   left: {
     flexDirection: "row",
@@ -104,9 +106,7 @@ const useRowStyles = makeStyles((C) => ({
 }));
 
 const useStyles = makeStyles((C) => ({
-  container: {
-    marginBottom: 8,
-  },
+  container: { marginBottom: 8 },
   sectionHeader: {
     flexDirection: "row",
     alignItems: "center",

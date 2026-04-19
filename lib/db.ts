@@ -13,7 +13,7 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase) {
   const DATABASE_VERSION = 1;
 
   let result = await db.getFirstAsync<{ user_version: number }>(
-    "PRAGMA user_version"
+    "PRAGMA user_version",
   );
   let currentDbVersion = result?.user_version ?? 0;
 
@@ -36,13 +36,17 @@ export async function migrateDbIfNeeded(db: SQLiteDatabase) {
         islem INTEGER NOT NULL,
         vakit_id TEXT NOT NULL
       );
+      CREATE INDEX IF NOT EXISTS idx_history_logs_tarih
+ON history_logs (tarih);
+CREATE INDEX IF NOT EXISTS idx_history_logs_vakit_id
+ON history_logs (vakit_id);
     `);
 
     // Varsayılan vakitleri oluştur
     for (const key of PRAYER_KEYS) {
       await db.runAsync(
         "INSERT OR IGNORE INTO prayers (vakit_id, kalan_sayi) VALUES (?, ?)",
-        [key, 0]
+        [key, 0],
       );
     }
 

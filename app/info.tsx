@@ -55,6 +55,8 @@ export default function KazaNamazlariScreen() {
           <Text style={styles.footerIcon}>🌿</Text>
         </View>
       </ScrollView>
+      <View style={styles.blobTopRight} pointerEvents="none" />
+      <View style={styles.blobBottomLeft} pointerEvents="none" />
     </SafeAreaView>
   );
 }
@@ -89,5 +91,25 @@ const useStyles = makeStyles((C) => ({
     fontSize: 28,
     marginTop: 16,
     opacity: 0.2,
+  },
+  blobTopRight: {
+    position: "absolute",
+    top: -80,
+    right: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(162,240,238,0.12)",
+    zIndex: -1,
+  },
+  blobBottomLeft: {
+    position: "absolute",
+    bottom: -120,
+    left: -120,
+    width: 320,
+    height: 320,
+    borderRadius: 999,
+    backgroundColor: "rgba(205,232,231,0.12)",
+    zIndex: -1,
   },
 }));

@@ -6,9 +6,9 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { SQLiteProvider } from "expo-sqlite";
 import { View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { migrateDbIfNeeded } from "../lib/db";
-
 const queryClient = new QueryClient();
 
 export const unstable_settings = {
@@ -67,20 +67,22 @@ function ThemedStack() {
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      <ThemeProvider>
-        <QueryClientProvider client={queryClient}>
-          <SQLiteProvider
-            databaseName="kaza_borc_defteri.db"
-            onInit={migrateDbIfNeeded}
-            useSuspense
-          >
-            <ToastProvider>
-              <ThemedStack />
-            </ToastProvider>
-          </SQLiteProvider>
-        </QueryClientProvider>
-      </ThemeProvider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <ThemeProvider>
+          <QueryClientProvider client={queryClient}>
+            <SQLiteProvider
+              databaseName="kaza_borc_defteri.db"
+              onInit={migrateDbIfNeeded}
+              useSuspense
+            >
+              <ToastProvider>
+                <ThemedStack />
+              </ToastProvider>
+            </SQLiteProvider>
+          </QueryClientProvider>
+        </ThemeProvider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

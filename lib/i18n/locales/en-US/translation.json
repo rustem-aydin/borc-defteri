@@ -292,6 +292,8 @@
         { "icon": "✗", "label": "Jumu'ah and Eid Prayers", "active": false }
       ],
       "nasil_kilinir": {
+        "title": "How to Perform?",
+        "niyet_title": "Intention",
         "niyet_body": "\"I intend for the sake of Allah to perform qada for the fard of Fajr prayer upon me.\"",
         "uygulama_title": "Practice",
         "uygulama_body": "Performed just like a regular prayer; only the intention specifies 'qada'. A prayer missed while traveling is made up under the same conditions it was missed. The qada of Witr prayer is also fulfilled as wajib."

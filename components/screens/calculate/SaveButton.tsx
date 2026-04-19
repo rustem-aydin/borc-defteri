@@ -1,8 +1,9 @@
 import { C } from "@/constants/colors";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import {
   ActivityIndicator,
   Animated,
+  DeviceEventEmitter,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -10,12 +11,21 @@ import {
 
 interface Props {
   label: string;
-  onPress: () => void;
+  onPress: () => Promise<void> | void;
   loading?: boolean;
+  eventName?: string;
 }
 
-export default function SaveButton({ label, onPress, loading = false }: Props) {
+export default function SaveButton({
+  label,
+  onPress,
+  loading: externalLoading = false,
+  eventName = "PrayersUpdated",
+}: Props) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const [internalLoading, setInternalLoading] = useState(false);
+
+  const loading = externalLoading || internalLoading;
 
   function handlePressIn() {
     Animated.spring(scaleAnim, {
@@ -33,11 +43,25 @@ export default function SaveButton({ label, onPress, loading = false }: Props) {
     }).start();
   }
 
+  async function handlePress() {
+    if (loading) return;
+
+    setInternalLoading(true);
+    try {
+      await onPress();
+      DeviceEventEmitter.emit(eventName);
+    } catch (error) {
+      console.error("SaveButton error:", error);
+    } finally {
+      setInternalLoading(false);
+    }
+  }
+
   return (
     <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
       <TouchableOpacity
         style={styles.btn}
-        onPress={onPress}
+        onPress={handlePress}
         onPressIn={handlePressIn}
         onPressOut={handlePressOut}
         activeOpacity={0.9}

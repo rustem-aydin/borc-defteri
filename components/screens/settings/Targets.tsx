@@ -9,6 +9,76 @@ import { DeviceEventEmitter, Pressable, Text, View } from "react-native";
 const DAILY_KEY = "@target_daily";
 const WEEKLY_KEY = "@target_weekly";
 
+function GoalRow({
+  icon,
+  iconBg,
+  iconColor,
+  title,
+  subtitle,
+  value,
+  onDecrease,
+  onIncrease,
+  borderTop,
+  decreaseDisabled,
+}: {
+  icon: string;
+  iconBg: string;
+  iconColor: string;
+  title: string;
+  subtitle: string;
+  value: number;
+  onDecrease: () => void;
+  onIncrease: () => void;
+  borderTop?: boolean;
+  decreaseDisabled?: boolean;
+}) {
+  const rowStyles = useRowStyles();
+  const { colors: C } = useTheme();
+
+  return (
+    <View style={[rowStyles.container, borderTop && rowStyles.borderTop]}>
+      <View style={rowStyles.left}>
+        <View style={[rowStyles.iconWrap, { backgroundColor: iconBg }]}>
+          <MaterialIcons name={icon as any} size={20} color={iconColor} />
+        </View>
+        <View style={rowStyles.textWrap}>
+          <Text style={rowStyles.title}>{title}</Text>
+          <Text style={rowStyles.subtitle}>{subtitle}</Text>
+        </View>
+      </View>
+      <View style={rowStyles.counterContainer}>
+        <Pressable
+          onPress={onDecrease}
+          disabled={decreaseDisabled}
+          style={({ pressed }) => [
+            rowStyles.actionBtn,
+            pressed && rowStyles.actionBtnPressed,
+            decreaseDisabled && rowStyles.actionBtnDisabled,
+          ]}
+        >
+          <MaterialIcons
+            name="remove"
+            size={20}
+            color={
+              decreaseDisabled ? C.onSurfaceVariant : C.onSecondaryContainer
+            }
+          />
+        </Pressable>
+        <Text style={rowStyles.counterValue}>{value}</Text>
+        <Pressable
+          onPress={onIncrease}
+          style={({ pressed }) => [
+            rowStyles.actionBtn,
+            pressed && rowStyles.actionBtnPressed,
+          ]}
+        >
+          <MaterialIcons name="add" size={20} color={C.onSecondaryContainer} />
+        </Pressable>
+      </View>
+    </View>
+  );
+}
+
 export function TargetSection() {
   const styles = useStyles();
   const { colors: C } = useTheme();
@@ -76,86 +146,99 @@ export function TargetSection() {
         <MaterialIcons name="flag" size={22} color={C.primary} />
         <Text style={styles.sectionTitle}>{i18n.t(`goals.title`)}</Text>
       </View>
-
       <View style={styles.card}>
-        <View style={styles.cardLeft}>
-          <View style={styles.iconWrap}>
-            <MaterialIcons name="today" size={24} color={C.primary} />
-          </View>
-          <View style={styles.textWrap}>
-            <Text style={styles.cardTitle}>{i18n.t(`goals.dailyGoal`)}</Text>
-            <Text style={styles.cardHint}>{i18n.t(`goals.dailyGoalHint`)}</Text>
-          </View>
-        </View>
-
-        <View style={styles.counterContainer}>
-          <Pressable
-            onPress={() => handleDailyChange(-1)}
-            style={({ pressed }) => [
-              styles.actionBtn,
-              pressed && styles.actionBtnPressed,
-            ]}
-          >
-            <MaterialIcons name="remove" size={20} color={C.primary} />
-          </Pressable>
-          <Text style={styles.counterValue}>{dailyTarget}</Text>
-          <Pressable
-            onPress={() => handleDailyChange(1)}
-            style={({ pressed }) => [
-              styles.actionBtn,
-              pressed && styles.actionBtnPressed,
-            ]}
-          >
-            <MaterialIcons name="add" size={20} color={C.primary} />
-          </Pressable>
-        </View>
-      </View>
-
-      <View style={[styles.card, { marginTop: 10 }]}>
-        <View style={styles.cardLeft}>
-          <View style={styles.iconWrap}>
-            <MaterialIcons name="date-range" size={24} color={C.primary} />
-          </View>
-          <View style={styles.textWrap}>
-            <Text style={styles.cardTitle}>{i18n.t(`goals.weeklyGoal`)}</Text>
-            <Text style={styles.cardHint}>
-              {i18n.t(`goals.weeklyGoalHint`)}
-            </Text>
-          </View>
-        </View>
-
-        <View style={styles.counterContainer}>
-          <Pressable
-            onPress={() => handleWeeklyChange(-1)}
-            style={({ pressed }) => [
-              styles.actionBtn,
-              pressed && styles.actionBtnPressed,
-              weeklyTarget <= dailyTarget * 7 && styles.actionBtnDisabled,
-            ]}
-          >
-            <MaterialIcons
-              name="remove"
-              size={20}
-              color={
-                weeklyTarget <= dailyTarget * 7 ? C.onSurfaceVariant : C.primary
-              }
-            />
-          </Pressable>
-          <Text style={styles.counterValue}>{weeklyTarget}</Text>
-          <Pressable
-            onPress={() => handleWeeklyChange(1)}
-            style={({ pressed }) => [
-              styles.actionBtn,
-              pressed && styles.actionBtnPressed,
-            ]}
-          >
-            <MaterialIcons name="add" size={20} color={C.primary} />
-          </Pressable>
-        </View>
+        <GoalRow
+          icon="today"
+          iconBg={C.primaryContainer}
+          iconColor={C.onPrimaryContainer}
+          title={i18n.t(`goals.dailyGoal`)}
+          subtitle={i18n.t(`goals.dailyGoalHint`)}
+          value={dailyTarget}
+          onDecrease={() => handleDailyChange(-1)}
+          onIncrease={() => handleDailyChange(1)}
+        />
+        <GoalRow
+          icon="date-range"
+          iconBg={C.secondaryContainer}
+          iconColor={C.onSecondaryContainer}
+          title={i18n.t(`goals.weeklyGoal`)}
+          subtitle={i18n.t(`goals.weeklyGoalHint`)}
+          value={weeklyTarget}
+          onDecrease={() => handleWeeklyChange(-1)}
+          onIncrease={() => handleWeeklyChange(1)}
+          borderTop
+          decreaseDisabled={weeklyTarget <= dailyTarget * 7}
+        />
       </View>
     </View>
   );
 }
+
+const useRowStyles = makeStyles((C) => ({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+  },
+  borderTop: {
+    borderTopWidth: 1,
+    borderTopColor: C.outlineVariant + "26",
+  },
+  left: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+    flex: 1,
+    marginRight: 12,
+  },
+  iconWrap: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textWrap: { flex: 1 },
+  title: {
+    fontFamily: "Manrope_700Bold",
+    fontSize: 15,
+    color: C.onSurface,
+  },
+  subtitle: {
+    fontFamily: "PlusJakartaSans_400Regular",
+    fontSize: 13,
+    color: C.onSurfaceVariant,
+    marginTop: 2,
+  },
+  counterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+  },
+  actionBtn: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: C.secondaryContainer,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  actionBtnPressed: {
+    backgroundColor: C.secondaryContainer + "70",
+  },
+  actionBtnDisabled: {
+    backgroundColor: C.surfaceContainerHighest,
+  },
+  counterValue: {
+    fontFamily: "Manrope_700Bold",
+    fontSize: 18,
+    color: C.onSurface,
+    width: 44,
+    textAlign: "center",
+  },
+}));
 
 const useStyles = makeStyles((C) => ({
   container: {
@@ -176,65 +259,6 @@ const useStyles = makeStyles((C) => ({
   card: {
     backgroundColor: C.surfaceContainerLowest,
     borderRadius: 16,
-    padding: 16,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  cardLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 16,
-    flex: 1,
-  },
-  iconWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: C.primaryFixed + "40",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textWrap: {
-    flex: 1,
-    paddingRight: 8,
-  },
-  cardTitle: {
-    fontFamily: "Manrope_700Bold",
-    fontSize: 16,
-    color: C.onSurface,
-    marginBottom: 2,
-  },
-  cardHint: {
-    fontFamily: "PlusJakartaSans_400Regular",
-    fontSize: 12,
-    color: C.onSurfaceVariant,
-    lineHeight: 16,
-  },
-  counterContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 2,
-  },
-  actionBtn: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    backgroundColor: C.primaryFixed,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  actionBtnPressed: {
-    backgroundColor: C.primaryFixed + "70",
-  },
-  actionBtnDisabled: {
-    backgroundColor: C.surfaceContainerHigh,
-  },
-  counterValue: {
-    fontFamily: "Manrope_700Bold",
-    fontSize: 18,
-    color: C.onSurface,
-    width: 44,
-    textAlign: "center",
+    overflow: "hidden",
   },
 }));

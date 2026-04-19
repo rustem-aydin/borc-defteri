@@ -44,7 +44,6 @@ export default function KazaHesaplaScreen() {
     navigation.goBack();
   });
 
-  // Scroll to top when switching tabs
   function handleTabChange(tab: "auto" | "manual") {
     setActiveTab(tab);
     scrollRef.current?.scrollTo({ y: 0, animated: true });
@@ -66,7 +65,6 @@ export default function KazaHesaplaScreen() {
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
-          {/* ── Page heading ── */}
           <View style={styles.heading}>
             <Text style={styles.headingTitle}>
               {i18n.t("calculation.determineDebt")}
@@ -78,7 +76,6 @@ export default function KazaHesaplaScreen() {
 
           <TabBar active={activeTab} onChange={handleTabChange} />
 
-          {/* ── Forms ── */}
           <View style={styles.formArea}>
             {activeTab === "auto" ? (
               <AutoForm
@@ -100,7 +97,6 @@ export default function KazaHesaplaScreen() {
             )}
           </View>
 
-          {/* ── Save Button ── */}
           <View style={styles.saveBtnWrapper}>
             <SaveButton
               label={
@@ -115,7 +111,6 @@ export default function KazaHesaplaScreen() {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      {/* Decorative blobs */}
       <View style={styles.blobTopRight} pointerEvents="none" />
       <View style={styles.blobBottomLeft} pointerEvents="none" />
     </SafeAreaView>

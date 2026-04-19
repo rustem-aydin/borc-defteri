@@ -131,8 +131,8 @@ export function SecuritySection() {
       <View style={styles.card}>
         <ToggleRow
           icon="pin"
-          iconBg={C.secondaryContainer}
-          iconColor={C.onSecondaryContainer}
+          iconBg={C.primaryContainer}
+          iconColor={C.onPrimaryContainer}
           title={i18n.t(`security.pinProtection`)}
           subtitle={i18n.t(`security.pinProtectionSubtitle`)}
           value={pinEnabled}
@@ -140,8 +140,8 @@ export function SecuritySection() {
         />
         <NavRow
           icon="dialpad"
-          iconBg={C.surfaceContainer}
-          iconColor={C.secondary}
+          iconBg={C.secondaryContainer}
+          iconColor={C.onSecondaryContainer}
           title={
             pinExists ? i18n.t(`security.changePin`) : i18n.t(`security.setPin`)
           }
@@ -157,6 +157,7 @@ export function SecuritySection() {
     </View>
   );
 }
+
 const useRowStyles = makeStyles((C) => ({
   container: {
     flexDirection: "row",

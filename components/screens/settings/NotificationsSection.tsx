@@ -31,6 +31,7 @@ const STORAGE_KEY_ENABLED = "@reminder_enabled";
 
 export function NotificationsSection() {
   const styles = useStyles();
+  const rowStyles = useRowStyles();
   const { colors: C } = useTheme();
 
   const [remindersEnabled, setRemindersEnabled] = useState(false);
@@ -130,22 +131,26 @@ export function NotificationsSection() {
         <Text style={styles.sectionTitle}>{i18n.t(`notifications.title`)}</Text>
       </View>
       <View style={styles.card}>
-        <View style={styles.toggleRow}>
-          <View style={styles.rowLeft}>
+        {/* Toggle Row */}
+        <View style={rowStyles.container}>
+          <View style={rowStyles.left}>
             <View
-              style={[styles.iconWrap, { backgroundColor: C.primaryFixed }]}
+              style={[
+                rowStyles.iconWrap,
+                { backgroundColor: C.primaryContainer },
+              ]}
             >
               <MaterialIcons
                 name="notifications-active"
                 size={20}
-                color={C.primary}
+                color={C.onPrimaryContainer}
               />
             </View>
-            <View style={styles.textWrap}>
-              <Text style={styles.rowTitle}>
+            <View style={rowStyles.textWrap}>
+              <Text style={rowStyles.title}>
                 {i18n.t(`notifications.dailyReminders`)}
               </Text>
-              <Text style={styles.rowSubtitle}>
+              <Text style={rowStyles.subtitle}>
                 {i18n.t(`notifications.dailyRemindersSubtitle`)}
               </Text>
             </View>
@@ -159,32 +164,45 @@ export function NotificationsSection() {
           />
         </View>
 
-        <View style={styles.timeRow}>
-          <View
-            style={[styles.timeCard, !remindersEnabled && styles.disabledCard]}
-          >
-            <Text style={styles.timeLabel}>
-              {i18n.t(`notifications.reminderTime`)}
-            </Text>
-            <Pressable
-              disabled={!remindersEnabled}
-              onPress={() => setShowPicker(true)}
-              style={({ pressed }) => [
-                styles.timeButton,
-                pressed && styles.timeButtonPressed,
-                !remindersEnabled && styles.disabledButton,
+        {/* Time Row */}
+        <View style={[rowStyles.container, rowStyles.borderTop]}>
+          <View style={rowStyles.left}>
+            <View
+              style={[
+                rowStyles.iconWrap,
+                { backgroundColor: C.secondaryContainer },
               ]}
             >
-              <Text
-                style={[
-                  styles.timeText,
-                  !remindersEnabled && styles.disabledText,
-                ]}
-              >
-                {formatTime(reminderTime)}
+              <MaterialIcons
+                name="schedule"
+                size={20}
+                color={C.onSecondaryContainer}
+              />
+            </View>
+            <View style={rowStyles.textWrap}>
+              <Text style={rowStyles.title}>
+                {i18n.t(`notifications.reminderTime`)}
               </Text>
-            </Pressable>
+            </View>
           </View>
+          <Pressable
+            disabled={!remindersEnabled}
+            onPress={() => setShowPicker(true)}
+            style={({ pressed }) => [
+              rowStyles.timeButton,
+              pressed && rowStyles.timeButtonPressed,
+              !remindersEnabled && rowStyles.timeButtonDisabled,
+            ]}
+          >
+            <Text
+              style={[
+                rowStyles.timeButtonText,
+                !remindersEnabled && rowStyles.timeButtonTextDisabled,
+              ]}
+            >
+              {formatTime(reminderTime)}
+            </Text>
+          </Pressable>
         </View>
       </View>
 
@@ -231,6 +249,69 @@ export function NotificationsSection() {
   );
 }
 
+const useRowStyles = makeStyles((C) => ({
+  container: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 24,
+    paddingVertical: 20,
+  },
+  borderTop: {
+    borderTopWidth: 1,
+    borderTopColor: C.outlineVariant + "26",
+  },
+  left: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 16,
+    flex: 1,
+    marginRight: 12,
+  },
+  iconWrap: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  textWrap: { flex: 1 },
+  title: {
+    fontFamily: "Manrope_700Bold",
+    fontSize: 15,
+    color: C.onSurface,
+  },
+  subtitle: {
+    fontFamily: "PlusJakartaSans_400Regular",
+    fontSize: 13,
+    color: C.onSurfaceVariant,
+    marginTop: 2,
+  },
+  timeButton: {
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 10,
+    backgroundColor: C.secondaryContainer,
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 64,
+  },
+  timeButtonPressed: {
+    backgroundColor: C.secondaryContainer + "70",
+  },
+  timeButtonDisabled: {
+    backgroundColor: C.surfaceContainerHighest,
+  },
+  timeButtonText: {
+    fontFamily: "Manrope_700Bold",
+    fontSize: 14,
+    color: C.onSecondaryContainer,
+  },
+  timeButtonTextDisabled: {
+    color: C.onSurfaceVariant,
+  },
+}));
+
 const useStyles = makeStyles((C) => ({
   container: { marginBottom: 8 },
   sectionHeader: {
@@ -250,69 +331,6 @@ const useStyles = makeStyles((C) => ({
     borderRadius: 16,
     overflow: "hidden",
   },
-  toggleRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: 24,
-    paddingVertical: 20,
-  },
-  rowLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 16,
-    flex: 1,
-    marginRight: 12,
-  },
-  iconWrap: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  textWrap: { flex: 1 },
-  rowTitle: {
-    fontFamily: "Manrope_700Bold",
-    fontSize: 15,
-    color: C.onSurface,
-  },
-  rowSubtitle: {
-    fontFamily: "PlusJakartaSans_400Regular",
-    fontSize: 13,
-    color: C.onSurfaceVariant,
-    marginTop: 2,
-  },
-  timeRow: { paddingHorizontal: 24, paddingBottom: 24 },
-  timeCard: {
-    backgroundColor: C.surfaceContainerLow,
-    borderRadius: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  disabledCard: { opacity: 0.6 },
-  timeLabel: {
-    fontFamily: "PlusJakartaSans_600SemiBold",
-    fontSize: 13,
-    color: C.secondary,
-  },
-  timeButton: {
-    backgroundColor: C.primary + "1A",
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 999,
-  },
-  disabledButton: { backgroundColor: C.surfaceContainerHighest },
-  timeButtonPressed: { opacity: 0.7 },
-  timeText: {
-    fontFamily: "PlusJakartaSans_700Bold",
-    fontSize: 13,
-    color: C.primary,
-  },
-  disabledText: { color: C.onSurfaceVariant },
   modalOverlay: {
     flex: 1,
     justifyContent: "flex-end",
