@@ -3,9 +3,9 @@
     "name": "Akıllı Kaza Namazı Rehberi",
     "slug": "borc-defteri",
     "scheme": "akillikazanamazirehberi",
-    "version": "1.0.6",
+    "version": "1.0.8",
     "orientation": "portrait",
-    "icon": "./assets/logo.png",
+    "icon": "./assets/logo1.png",
     "userInterfaceStyle": "automatic",
 
     "build": {
@@ -24,11 +24,11 @@
       "adaptiveIcon": {
         "backgroundColor": "#f7faf9",
         "foregroundImage": "./assets/logo1.png",
-        "monochromeImage": "./assets/logo-mono.png"
+        "monochromeImage": "./assets/logo1.png"
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": true,
-      "package": "com.rustem_aydin.akillikazanamazirehberi"
+      "package": "com.rustem_aydin.borcdefteri"
     },
 
     "web": {

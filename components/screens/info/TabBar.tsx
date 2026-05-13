@@ -13,8 +13,8 @@ interface Props {
 const TABS: { key: TabInfo; label: string }[] = [
   { key: "hanefi", label: i18n.t("info.tabs.hanefi") },
   { key: "safii", label: i18n.t("info.tabs.safii") },
-  { key: "hanbeli", label: i18n.t("info.tabs.maliki") },
-  { key: "maliki", label: i18n.t("info.tabs.hanbeli") },
+  { key: "hanbeli", label: i18n.t("info.tabs.hanbeli") },
+  { key: "maliki", label: i18n.t("info.tabs.maliki") },
 ];
 
 // Sekme indekslerini almak için yardımcı fonksiyon

@@ -424,6 +424,19 @@
     "detailedCalculation": "Detaylı Hesaplama",
     "calculateHint": "Kaza namazlarınızı hesaplamak ve yönetmek için dokunun."
   },
+  "support": {
+    "title": "Destek",
+    "shareApp": "Uygulamayı Paylaş",
+    "shareHint": "Arkadaşlarınla paylaş",
+    "shareMessage": "Bu harika uygulamaya göz at!",
+    "shareUrl": "https://play.google.com/store/apps/details?id=com.rustem_aydin.borcdefteri",
+    "rateApp": "Bizi Değerlendir",
+    "rateHint": "Google Play'de 5 yıldız ver",
+    "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.rustem_aydin.borcdefteri",
+    "visitWebsite": "Web Sitemiz",
+    "websiteHint": "Daha fazla bilgi için",
+    "websiteUrl": "https://elharezmi.com"
+  },
   "editSection": {
     "editPrefix": "",
     "editHighlight": "Düzenleme Alanı",

@@ -4,6 +4,7 @@ import { CalculationSection } from "@/components/screens/settings/CalculationSec
 import { HeroSection } from "@/components/screens/settings/HeroSection";
 import { NotificationsSection } from "@/components/screens/settings/NotificationsSection";
 import { SecuritySection } from "@/components/screens/settings/SecuritySection";
+import { SupportSection } from "@/components/screens/settings/SupportSection";
 import { TargetSection } from "@/components/screens/settings/Targets";
 import { VitrSection } from "@/components/screens/settings/VitrSection";
 import { makeStyles } from "@/hooks/make-styles";
@@ -32,6 +33,7 @@ export default function SettingsScreen() {
           <SecuritySection />
           <NotificationsSection />
           <CalculationSection />
+          <SupportSection />
         </View>
       </ScrollView>
       <View style={styles.blobTopRight} pointerEvents="none" />

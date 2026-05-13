@@ -395,6 +395,19 @@
     "ayarlar": "Settings",
     "hesaplama": "Calculation"
   },
+  "support": {
+    "title": "Support",
+    "shareApp": "Share App",
+    "shareHint": "Share with your friends",
+    "shareMessage": "Check out this awesome app!",
+    "shareUrl": "https://play.google.com/store/apps/details?id=com.rustem_aydin.borcdefteri",
+    "rateApp": "Rate Us",
+    "rateHint": "Give us 5 stars on Google Play",
+    "googlePlayUrl": "https://play.google.com/store/apps/details?id=com.rustem_aydin.borcdefteri",
+    "visitWebsite": "Our Website",
+    "websiteHint": "For more information",
+    "websiteUrl": "https://elharezmi.com"
+  },
   "appearance": {
     "title": "Appearance",
     "interfaceTheme": "INTERFACE THEME",

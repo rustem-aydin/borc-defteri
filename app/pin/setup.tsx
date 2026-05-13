@@ -5,9 +5,17 @@ import { MaterialIcons } from "@expo/vector-icons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { Alert, Pressable, Text, View } from "react-native";
+import { Alert, Dimensions, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { savePin } from "../../lib/auth";
+
+const { width: SCREEN_W, height: SCREEN_H } = Dimensions.get("window");
+
+// Ekran boyutuna göre scale eden yardımcı fonksiyon
+// 375px genişlik baz alınarak hesaplanır (iPhone SE / eski standart)
+const BASE_WIDTH = 375;
+const scale = SCREEN_W / BASE_WIDTH;
+const normalize = (size: number) => Math.round(size * scale);
 
 export default function PinSetup() {
   const [pin, setPin] = useState("");
@@ -78,7 +86,7 @@ export default function PinSetup() {
       <View style={styles.header}>
         <View style={styles.logoRow}>
           <Image
-            style={{ width: 120, height: 120, borderRadius: 20 }}
+            style={styles.logoImage}
             source={require("@/assets/logo1.png")}
             contentFit="contain"
           />
@@ -115,7 +123,7 @@ export default function PinSetup() {
                 >
                   <MaterialIcons
                     name="backspace"
-                    size={28}
+                    size={normalize(28)}
                     color={styles._colors.primary}
                   />
                 </Pressable>
@@ -135,6 +143,7 @@ export default function PinSetup() {
     </SafeAreaView>
   );
 }
+
 const useStyles = makeStyles((C) => ({
   _colors: C as any,
   safeArea: {
@@ -144,18 +153,23 @@ const useStyles = makeStyles((C) => ({
   header: {
     width: "100%",
     flexDirection: "row",
-    justifyContent: "center", // "space-between" yerine
+    justifyContent: "center",
     alignItems: "center",
-    paddingHorizontal: 32,
-    marginTop: 64,
+    paddingHorizontal: normalize(32),
+    marginTop: normalize(64),
   },
   logoRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    gap: normalize(8),
+  },
+  logoImage: {
+    width: normalize(120),
+    height: normalize(120),
+    borderRadius: normalize(20),
   },
   logoText: {
-    fontSize: 20,
+    fontSize: normalize(20),
     fontWeight: "bold",
     letterSpacing: -0.5,
     color: C.primary,
@@ -165,44 +179,44 @@ const useStyles = makeStyles((C) => ({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 32,
+    paddingHorizontal: normalize(32),
   },
   messageText: {
     color: C.onSurfaceVariant,
-    fontSize: 14,
+    fontSize: normalize(14),
     fontWeight: "600",
     letterSpacing: 2,
     textTransform: "uppercase",
-    marginBottom: 40,
+    marginBottom: normalize(40),
     textAlign: "center",
   },
   dotsContainer: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 16,
-    marginBottom: 64,
-    height: 32,
+    gap: normalize(16),
+    marginBottom: normalize(64),
+    height: normalize(32),
   },
   dotWrapper: {
-    width: 32,
-    height: 32,
+    width: normalize(32),
+    height: normalize(32),
     alignItems: "center",
     justifyContent: "center",
   },
   dotActive: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
+    width: normalize(20),
+    height: normalize(20),
+    borderRadius: normalize(10),
     backgroundColor: C.primary,
     borderWidth: 3,
-    borderColor: C.primaryContainer, // Aktif noktada hafif bir halka efekti
+    borderColor: C.primaryContainer,
   },
   blobTopRight: {
     position: "absolute",
     top: 0,
-    right: -120,
-    width: 320,
-    height: 320,
+    right: -normalize(120),
+    width: normalize(320),
+    height: normalize(320),
     borderRadius: 999,
     backgroundColor: "rgba(162,240,238,0.12)",
     zIndex: -1,
@@ -210,48 +224,48 @@ const useStyles = makeStyles((C) => ({
   blobBottomLeft: {
     position: "absolute",
     bottom: 0,
-    left: -120,
-    width: 320,
-    height: 320,
+    left: -normalize(120),
+    width: normalize(320),
+    height: normalize(320),
     borderRadius: 999,
     backgroundColor: "rgba(205,232,231,0.12)",
     zIndex: -1,
   },
   dotInactive: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    backgroundColor: C.outlineVariant, // Pasif noktalar için daha belirgin ama yumuşak bir ton
+    width: normalize(14),
+    height: normalize(14),
+    borderRadius: normalize(7),
+    backgroundColor: C.outlineVariant,
   },
   keypadContainer: {
-    width: 280,
+    width: normalize(280),
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
-    rowGap: 24,
+    rowGap: normalize(24),
   },
   keyWrapper: {
-    width: 80,
+    width: normalize(80),
     alignItems: "center",
     justifyContent: "center",
   },
   keyButton: {
-    width: 64,
-    height: 64,
+    width: normalize(64),
+    height: normalize(64),
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 32,
+    borderRadius: normalize(32),
     backgroundColor: C.surfaceContainerHigh,
   },
   keyText: {
-    fontSize: 32,
+    fontSize: normalize(32),
     fontWeight: "bold",
     color: C.primary,
-    marginBottom: 4,
+    marginBottom: normalize(4),
   },
   bottomSpacer: {
-    marginTop: 48,
-    width: 56,
-    height: 56,
+    marginTop: normalize(48),
+    width: normalize(56),
+    height: normalize(56),
   },
 }));
