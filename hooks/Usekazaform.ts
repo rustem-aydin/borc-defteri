@@ -27,13 +27,13 @@ export function parseDate(str: string): Date | null {
   const parts = str.split(".");
   if (parts.length !== 3) return null;
   const [d, m, y] = parts.map(Number);
-  if (!d || !m || !y || y < 1900 || y > 2100) return null;
+  if (!d || !m || !y || y < 1900 || y > 2100 || m < 1 || m > 12 || d < 1 || d > 31) return null;
   const date = new Date(y, m - 1, d);
   if (isNaN(date.getTime())) return null;
   return date;
 }
 
-function calculate(params: {
+export function calculate(params: {
   gender: Gender;
   birthDate: Date;
   pubertyAge: number;
