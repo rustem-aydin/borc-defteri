@@ -58,4 +58,33 @@ describe("calculate", () => {
     // Result: 2921 - 682 - 40 = 2199
     expect(result.sabah).toBe(2199);
   });
+
+  it("excludes vitir when vitrEnabled is false", () => {
+    const result = calculate({
+      gender: "erkek",
+      birthDate: new Date(2000, 0, 1),
+      pubertyAge: 12,
+      regularPrayerDate: new Date(2020, 0, 1),
+      monthlyHayzDays: 0,
+      totalNifasDays: 0,
+      vitrEnabled: false,
+    });
+
+    expect(result.vitir).toBeUndefined();
+    expect(result.sabah).toBeDefined();
+  });
+
+  it("includes vitir when vitrEnabled is true", () => {
+    const result = calculate({
+      gender: "erkek",
+      birthDate: new Date(2000, 0, 1),
+      pubertyAge: 12,
+      regularPrayerDate: new Date(2020, 0, 1),
+      monthlyHayzDays: 0,
+      totalNifasDays: 0,
+      vitrEnabled: true,
+    });
+
+    expect(result.vitir).toBeDefined();
+  });
 });

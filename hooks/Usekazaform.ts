@@ -40,6 +40,7 @@ export function calculate(params: {
   regularPrayerDate: Date;
   monthlyHayzDays: number;
   totalNifasDays: number;
+  vitrEnabled?: boolean;
 }): Record<string, number> {
   const {
     gender,
@@ -48,13 +49,16 @@ export function calculate(params: {
     regularPrayerDate,
     monthlyHayzDays,
     totalNifasDays,
+    vitrEnabled = true,
   } = params;
 
   const pubertyDate = new Date(birthDate);
   pubertyDate.setFullYear(pubertyDate.getFullYear() + pubertyAge);
 
+  const keys = vitrEnabled ? PRAYER_KEYS : PRAYER_KEYS.filter((k) => k !== "vitir");
+
   if (regularPrayerDate <= pubertyDate) {
-    return Object.fromEntries(PRAYER_KEYS.map((k) => [k, 0]));
+    return Object.fromEntries(keys.map((k) => [k, 0]));
   }
 
   let totalDays = daysBetween(pubertyDate, regularPrayerDate);
@@ -65,7 +69,7 @@ export function calculate(params: {
     totalDays = Math.max(0, totalDays - hayzTotal - totalNifasDays);
   }
 
-  return Object.fromEntries(PRAYER_KEYS.map((k: any) => [k, totalDays]));
+  return Object.fromEntries(keys.map((k: any) => [k, totalDays]));
 }
 
 // ─── Hook ──────────────────────────────────────────────────────────

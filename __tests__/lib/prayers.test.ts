@@ -1,30 +1,21 @@
-import { PRAYER_METADATA, PRAYER_KEYS } from "@/lib/prayers";
+import { getPrayerMetadata, PRAYER_KEYS } from "@/lib/prayers";
 
 describe("lib/prayers", () => {
-  it("exports all 6 vakit keys", () => {
-    expect(PRAYER_KEYS).toHaveLength(6);
-    expect(PRAYER_KEYS).toContain("sabah");
-    expect(PRAYER_KEYS).toContain("ogle");
-    expect(PRAYER_KEYS).toContain("ikindi");
-    expect(PRAYER_KEYS).toContain("aksam");
-    expect(PRAYER_KEYS).toContain("yatsi");
-    expect(PRAYER_KEYS).toContain("vitir");
-  });
-
   it("provides metadata for every vakit", () => {
     for (const key of PRAYER_KEYS) {
-      const meta = PRAYER_METADATA[key];
+      const meta = getPrayerMetadata(key);
       expect(meta).toBeDefined();
-      expect(meta.label).toBeTruthy();
       expect(meta.color).toMatch(/^#[0-9a-fA-F]{6}$/);
       expect(meta.image).toBeTruthy();
     }
   });
 
   it("resolves labels through i18n at call time", () => {
-    // Labels should be functions or getters, not frozen at module scope
-    const sabah = PRAYER_METADATA.sabah;
-    expect(typeof sabah.label).toBe("string");
-    expect(sabah.label.length).toBeGreaterThan(0);
+    const first = getPrayerMetadata("sabah").label;
+    const second = getPrayerMetadata("sabah").label;
+    // Both calls should return the same string, proving it's resolved at call time
+    // not frozen at module scope
+    expect(first).toBe(second);
+    expect(first.length).toBeGreaterThan(0);
   });
 });

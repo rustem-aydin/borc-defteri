@@ -1,13 +1,7 @@
 import { SQLiteDatabase } from "expo-sqlite";
+import { PRAYER_KEYS } from "./prayers";
 
-export const PRAYER_KEYS = [
-  "sabah",
-  "ogle",
-  "ikindi",
-  "aksam",
-  "yatsi",
-  "vitir",
-];
+export { PRAYER_KEYS };
 
 export async function migrateDbIfNeeded(db: SQLiteDatabase) {
   const DATABASE_VERSION = 1;
