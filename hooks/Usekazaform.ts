@@ -22,6 +22,16 @@ function daysBetween(start: Date, end: Date): number {
   return Math.max(0, Math.floor(ms / (1000 * 60 * 60 * 24)));
 }
 
+export function validateManualCounts(counts: Record<string, number>): { valid: boolean; error?: string } {
+  for (const key of PRAYER_KEYS) {
+    const val = counts[key] ?? 0;
+    if (val < 0) {
+      return { valid: false, error: "negativeCountError" };
+    }
+  }
+  return { valid: true };
+}
+
 /** Parse "DD.MM.YYYY" → Date or null */
 export function parseDate(str: string): Date | null {
   const parts = str.split(".");
@@ -128,6 +138,16 @@ export function useKazaForm(onSaved?: () => void) {
     });
   }
 
+  function validateManualCounts(counts: Record<string, number>): { valid: boolean; error?: string } {
+    for (const key of PRAYER_KEYS) {
+      const val = counts[key] ?? 0;
+      if (val < 0) {
+        return { valid: false, error: "negativeCountError" };
+      }
+    }
+    return { valid: true };
+  }
+
   async function handleSave() {
     setSaving(true);
     try {
@@ -178,15 +198,16 @@ export function useKazaForm(onSaved?: () => void) {
         // Manual
         const counts: Record<string, number> = {};
         for (const key of PRAYER_KEYS) {
-          const val = parseInt(manual[key as keyof ManualCounts]) || 0;
-          if (val < 0) {
-            Alert.alert(
-              i18n.t("calculation.error"),
-              i18n.t("calculation.negativeCountError"),
-            );
-            return;
-          }
-          counts[key] = val;
+          counts[key] = parseInt(manual[key as keyof ManualCounts]) || 0;
+        }
+
+        const validation = validateManualCounts(counts);
+        if (!validation.valid) {
+          Alert.alert(
+            i18n.t("calculation.error"),
+            i18n.t(`calculation.${validation.error}`),
+          );
+          return;
         }
 
         await persistToDb(counts);
