@@ -1,7 +1,6 @@
 import { makeStyles } from "@/hooks/make-styles";
+import { i18n } from "@/lib/i18n";
 import { Text, View } from "react-native";
-
-const DAY_LABELS = ["Pzt", "Sal", "Çar", "Per", "Cum", "Cmt", "Paz"];
 
 interface WeeklySummaryCardProps {
   weeklyCount: number;
@@ -13,13 +12,18 @@ export function WeeklySummaryCard({
   todayDayIdx,
 }: WeeklySummaryCardProps) {
   const styles = useStyles();
+  const dayLabels = [0, 1, 2, 3, 4, 5, 6].map((i) =>
+    i18n.t(`diger.gunler.${i}`),
+  );
 
   return (
     <View>
       <View style={styles.bentoCard}>
-        <Text style={styles.bentoTitle}>Haftalık Özet</Text>
+        <Text style={styles.bentoTitle}>
+          {i18n.t("history.weeklySummaryTitle")}
+        </Text>
         <Text style={styles.bentoSubtitle}>
-          Geriye dönük son 7 günde {weeklyCount} vakit kaza kılındı.
+          {i18n.t("history.weeklySummarySubtitle", { count: weeklyCount })}
         </Text>
 
         <View style={styles.progressBg}>
@@ -36,7 +40,7 @@ export function WeeklySummaryCard({
         </View>
 
         <View style={styles.daysRow}>
-          {DAY_LABELS.map((day, i) => (
+          {dayLabels.map((day, i) => (
             <Text
               key={i}
               style={[

@@ -19,6 +19,12 @@
       "error": "Could not fetch daily goal",
       "target": "Goal",
       "detaylari": "Details"
+    },
+    "emptyState": {
+      "title": "Make a New Beginning",
+      "subtitle": "You have no calculated missed prayers yet. Start by calculating now.",
+      "calculate": "Calculate My Missed Prayers",
+      "guide": "How does it work? View the guide"
     }
   },
   "days": [
@@ -52,6 +58,12 @@
     "nedir_subtitle": "Definition & Nature",
     "faq_title": "FAQS",
     "tertip_title": "Order (Tartib)",
+    "tertip_intro": "The order of missed prayers",
+    "kerahatArc": {
+      "dogus": "Sunrise",
+      "istiva": "Istiwa' (Dhuhr)",
+      "batis": "Sunset"
+    },
 
     "footer": "The information provided has been prepared based on the Presidency of Religious Affairs and reliable fiqh sources. Consulting a fiqh scholar is recommended for specific situations.",
     "hanefi": {
@@ -201,7 +213,18 @@
   },
   "settings": {
     "language": "Language",
-    "appearance": "Appearance"
+    "appearance": "Appearance",
+    "languageSection": {
+      "appLanguage": "App Language",
+      "select": "Select Language"
+    },
+    "dataSection": {
+      "title": "Data",
+      "cloudTitle": "Cloud Backup",
+      "cloudSubtitle": "Sync your data across devices",
+      "exportTitle": "Export Records",
+      "exportSubtitle": "Download your prayer history as PDF"
+    }
   },
   "diger": {
     "bugun": "Today",
@@ -260,6 +283,12 @@
     "websiteHint": "For more information",
     "websiteUrl": "https://elharezmi.com"
   },
+  "history": {
+    "empty": "No history entries yet.",
+    "sectionFallback": "HISTORY",
+    "weeklySummaryTitle": "Weekly Summary",
+    "weeklySummarySubtitle": "{{count}} missed prayers were performed in the past 7 days."
+  },
   "appearance": {
     "title": "Appearance",
     "interfaceTheme": "INTERFACE THEME",
@@ -287,7 +316,8 @@
     "calculateAndSave": "Calculate & Save",
     "save": "Save",
     "detailedCalculation": "Detailed Calculation",
-    "calculateHint": "Tap to calculate and manage your missed prayers."
+    "calculateHint": "Tap to calculate and manage your missed prayers.",
+    "autoSaveNote": "Calculation results will be saved to your profile automatically."
   },
   "editSection": {
     "editPrefix": "Edit ",

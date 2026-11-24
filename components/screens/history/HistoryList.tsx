@@ -1,6 +1,7 @@
 import { makeStyles } from "@/hooks/make-styles";
 import type { GroupedLog } from "@/hooks/useHistoryQuery";
 import { flattenHistorySections } from "@/lib/historySections";
+import { i18n } from "@/lib/i18n";
 import { FlashList } from "@shopify/flash-list";
 import { useMemo } from "react";
 import { Text, View } from "react-native";
@@ -69,7 +70,7 @@ export function HistoryList({
               ]}
             >
               <Text style={styles.sectionSubtitle}>
-                {item.subtitle || "GEÇMİŞ"}
+                {item.subtitle || i18n.t("history.sectionFallback")}
               </Text>
               <Text style={styles.sectionTitle}>{item.title}</Text>
             </View>

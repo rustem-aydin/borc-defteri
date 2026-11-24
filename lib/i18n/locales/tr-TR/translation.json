@@ -19,6 +19,12 @@
       "error": "Günlük hedef alınamadı",
       "target": "Hedef",
       "detaylari": "Detaylar"
+    },
+    "emptyState": {
+      "title": "Yeni Bir Başlangıç Yapın",
+      "subtitle": "Henüz hesaplanmış kaza namazınız bulunmuyor. Hemen hesaplayarak başlayın.",
+      "calculate": "Kaza Namazlarımı Hesapla",
+      "guide": "Nasıl çalışır? Rehberi görüntüle"
     }
   },
   "days": [
@@ -52,6 +58,12 @@
     "nedir_subtitle": "Tanım ve Mahiyet",
     "faq_title": "SSS",
     "tertip_title": "Tertip",
+    "tertip_intro": "Kazaya kalan namazların sırası",
+    "kerahatArc": {
+      "dogus": "Doğuş",
+      "istiva": "İstivaʼ (öğle)",
+      "batis": "Batış"
+    },
 
     "footer": "Verilen bilgiler Diyanet İşleri Başkanlığı ve güvenilir fıkıh kaynaklarına dayanılarak hazırlanmıştır. Özel durumlar için bir fıkıh alimine danışılması tavsiye edilir.",
     "hanefi": {
@@ -201,7 +213,18 @@
   },
   "settings": {
     "language": "Dil",
-    "appearance": "Görünüm"
+    "appearance": "Görünüm",
+    "languageSection": {
+      "appLanguage": "Uygulama Dili",
+      "select": "Dil Seçin"
+    },
+    "dataSection": {
+      "title": "Veri",
+      "cloudTitle": "Bulut Yedekleme",
+      "cloudSubtitle": "Verilerinizi cihazlar arasında senkronize edin",
+      "exportTitle": "Kayıtları Dışa Aktar",
+      "exportSubtitle": "Namaz geçmişinizi PDF olarak indirin"
+    }
   },
   "diger": {
     "bugun": "Bugün",
@@ -247,6 +270,12 @@
     "ayarlar": "Ayarlar",
     "hesaplama": "Hesaplama"
   },
+  "history": {
+    "empty": "Henüz geçmiş işlemi bulunmuyor.",
+    "sectionFallback": "GEÇMİŞ",
+    "weeklySummaryTitle": "Haftalık Özet",
+    "weeklySummarySubtitle": "Geriye dönük son 7 günde {{count}} vakit kaza kılındı."
+  },
   "appearance": {
     "title": "Görünüm",
     "interfaceTheme": "ARAYÜZ TEMASI",
@@ -274,7 +303,8 @@
     "calculateAndSave": "Hesapla ve Kaydet",
     "save": "Kaydet",
     "detailedCalculation": "Detaylı Hesaplama",
-    "calculateHint": "Kaza namazlarınızı hesaplamak ve yönetmek için dokunun."
+    "calculateHint": "Kaza namazlarınızı hesaplamak ve yönetmek için dokunun.",
+    "autoSaveNote": "Hesaplama sonuçları profilinize otomatik olarak kaydedilecektir."
   },
   "support": {
     "title": "Destek",

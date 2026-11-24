@@ -20,7 +20,7 @@ export function TertipSahibiCard({ mezhep = "hanefi" }: MadhabProps) {
       </View>
 
       <Text style={styles.bodyText}>
-        Kazaya kalan namazların sırası{" "}
+        {i18n.t(`info.tertip_intro`)}{" "}
         <Text style={styles.highlightText}>
           {i18n.t(`${prefix}.highlight`)}
         </Text>{" "}

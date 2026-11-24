@@ -171,7 +171,7 @@ function SunArc({ C }: { C: any }) {
         fill={C.onSurfaceVariant}
         fontWeight="500"
       >
-        Doğuş
+        {i18n.t("info.kerahatArc.dogus")}
       </SvgText>
       <SvgText
         x="180"
@@ -181,7 +181,7 @@ function SunArc({ C }: { C: any }) {
         fill={C.onSurfaceVariant}
         fontWeight="500"
       >
-        İstivaʼ (öğle)
+        {i18n.t("info.kerahatArc.istiva")}
       </SvgText>
       <SvgText
         x="340"
@@ -191,7 +191,7 @@ function SunArc({ C }: { C: any }) {
         fill={C.onSurfaceVariant}
         fontWeight="500"
       >
-        Batış
+        {i18n.t("info.kerahatArc.batis")}
       </SvgText>
     </Svg>
   );

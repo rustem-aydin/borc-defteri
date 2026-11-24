@@ -1,4 +1,5 @@
 import { C } from "@/constants/colors";
+import { i18n } from "@/lib/i18n";
 import React, { useRef, useState } from "react";
 import {
   ActivityIndicator,
@@ -72,9 +73,7 @@ export default function SaveButton({
           </>
         )}
       </TouchableOpacity>
-      <Text style={styles.note}>
-        Hesaplama sonuçları profilinize otomatik olarak kaydedilecektir.
-      </Text>
+      <Text style={styles.note}>{i18n.t("calculation.autoSaveNote")}</Text>
     </Animated.View>
   );
 }
