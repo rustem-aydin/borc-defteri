@@ -324,6 +324,11 @@
     "editHighlight": "Area",
     "subtitle": "Personalize your peace journey. Manage your security, notification, and appearance settings."
   },
+  "vitr": {
+    "title": "Witr Settings",
+    "countVitr": "Witr Count",
+    "countVitrSubtitle": "Show Witr prayer in the missed prayers list"
+  },
   "notifications": {
     "title": "Notifications",
     "notifTitle": "Missed Prayer Reminder 🕌",
