@@ -21,19 +21,9 @@ export function PrayerGrid() {
     return () => subscription.remove();
   }, []);
 
-  const { data, refetch } = usePrayersQuery();
+  const { data } = usePrayersQuery();
   const pushUpdate = usePushUpdate();
   const prayers = data?.prayers ?? [];
-
-  useEffect(() => {
-    const subscription = DeviceEventEmitter.addListener(
-      "PrayersUpdated",
-      () => {
-        refetch();
-      },
-    );
-    return () => subscription.remove();
-  }, [refetch]);
 
   const visiblePrayers = vitrEnabled
     ? prayers
@@ -51,12 +41,12 @@ export function PrayerGrid() {
             title={meta.label}
             color={meta.color}
             image={meta.image}
-            onDecrement={() =>
-              pushUpdate(prayer.vakit_id, prayer.kalan_sayi, -1)
-            }
-            onIncrement={() =>
-              pushUpdate(prayer.vakit_id, prayer.kalan_sayi, +1)
-            }
+            onDecrement={() => {
+              void pushUpdate(prayer.vakit_id, -1);
+            }}
+            onIncrement={() => {
+              void pushUpdate(prayer.vakit_id, +1);
+            }}
           />
         );
       })}

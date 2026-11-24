@@ -8,27 +8,18 @@ import { usePrayersQuery } from "@/hooks/usePrayersQuery";
 import { useTheme } from "@/lib/ThemeContext";
 import { formatDateRange, getEndOfWeek, getStartOfWeek } from "@/lib/utils";
 import { router } from "expo-router";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { DeviceEventEmitter, StatusBar, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { useCallback, useMemo, useState } from "react";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const styles = useStyles();
   const { isDark } = useTheme();
-  const { data, isLoading, refetch } = usePrayersQuery();
+  const { data, isLoading } = usePrayersQuery();
   const totalDebt = data?.totalDebt ?? 0;
 
   const [viewDate, setViewDate] = useState(new Date());
-
-  useEffect(() => {
-    const subscription = DeviceEventEmitter.addListener(
-      "PrayersUpdated",
-      () => {
-        refetch();
-      },
-    );
-    return () => subscription.remove();
-  }, [refetch]);
 
   const weekData = useMemo(() => {
     const startOfWeek = getStartOfWeek(viewDate);
@@ -51,11 +42,19 @@ export default function HomeScreen() {
   }, [viewDate]);
 
   const handlePrevWeek = useCallback(() => {
-    setViewDate((d) => new Date(d.setDate(d.getDate() - 7)));
+    setViewDate((d) => {
+      const next = new Date(d);
+      next.setDate(next.getDate() - 7);
+      return next;
+    });
   }, []);
 
   const handleNextWeek = useCallback(() => {
-    setViewDate((d) => new Date(d.setDate(d.getDate() + 7)));
+    setViewDate((d) => {
+      const next = new Date(d);
+      next.setDate(next.getDate() + 7);
+      return next;
+    });
   }, []);
 
   const handleCalculatePress = useCallback(() => {
@@ -64,10 +63,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle={isDark ? "light-content" : "dark-content"}
-        translucent={false}
-      />
+      <StatusBar style={isDark ? "light" : "dark"} />
       <HomeHeader />
 
       {isLoading ? (

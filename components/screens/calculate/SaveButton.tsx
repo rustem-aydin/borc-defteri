@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import {
   ActivityIndicator,
   Animated,
-  DeviceEventEmitter,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,14 +12,12 @@ interface Props {
   label: string;
   onPress: () => Promise<void> | void;
   loading?: boolean;
-  eventName?: string;
 }
 
 export default function SaveButton({
   label,
   onPress,
   loading: externalLoading = false,
-  eventName = "PrayersUpdated",
 }: Props) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const [internalLoading, setInternalLoading] = useState(false);
@@ -49,7 +46,6 @@ export default function SaveButton({
     setInternalLoading(true);
     try {
       await onPress();
-      DeviceEventEmitter.emit(eventName);
     } catch (error) {
       console.error("SaveButton error:", error);
     } finally {

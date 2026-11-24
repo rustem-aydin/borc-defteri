@@ -1,6 +1,7 @@
 import { Gender, Tab } from "@/constants/colors";
 import { PRAYER_KEYS } from "@/lib/db";
 import { i18n } from "@/lib/i18n";
+import { useQueryClient } from "@tanstack/react-query";
 import { useSQLiteContext } from "expo-sqlite";
 import { useState } from "react";
 import { Alert } from "react-native";
@@ -86,6 +87,7 @@ export function calculate(params: {
 
 export function useKazaForm(onSaved?: () => void) {
   const db = useSQLiteContext();
+  const queryClient = useQueryClient();
 
   const [activeTab, setActiveTab] = useState<Tab>("auto");
   const [loading, setSaving] = useState(false);
@@ -136,6 +138,10 @@ export function useKazaForm(onSaved?: () => void) {
         }
       }
     });
+
+    // Kalan borç, haftalık grafik, son işlem ve geçmiş aynı kaynaktan beslendiği
+    // için hepsi tek yerden tazelenir.
+    queryClient.invalidateQueries();
   }
 
   function validateManualCounts(counts: Record<string, number>): { valid: boolean; error?: string } {
