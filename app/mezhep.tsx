@@ -36,8 +36,8 @@ export default function MadhabScreen() {
     await saveMadhab(activeMadhab);
 
     if (isOnboarding) {
-      const protection = await AsyncStorage.getItem("pinProtectionEnabled");
-      router.replace(protection === "false" ? "/home" : "/pin/setup");
+      // Mezhep seçildi; şimdi hesaplama (vitir bu mezhebe göre hesaplanır).
+      router.replace("/calculate?from=onboarding");
       return;
     }
 

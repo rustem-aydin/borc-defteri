@@ -4,6 +4,7 @@ import { makeStyles } from "@/hooks/make-styles";
 import { ManualCounts } from "@/hooks/Usekazaform";
 import { PRAYER_KEYS } from "@/lib/db";
 import { i18n } from "@/lib/i18n";
+import { useMadhab } from "@/hooks/useMadhab";
 import React from "react";
 import { Image, Text, TextInput, View } from "react-native";
 
@@ -23,6 +24,10 @@ interface Props {
 
 export default function ManualForm({ manual, setManualField }: Props) {
   const styles = useStyles();
+  const { madhab } = useMadhab();
+  // Şafii'de vitir sünnet olduğu için borç listesinde yer almaz.
+  const keys =
+    madhab === "safii" ? PRAYER_KEYS.filter((k) => k !== "vitir") : PRAYER_KEYS;
 
   return (
     <View style={styles.card}>
@@ -40,10 +45,10 @@ export default function ManualForm({ manual, setManualField }: Props) {
       </View>
 
       <View style={styles.list}>
-        {PRAYER_KEYS.map((key, i) => (
+        {keys.map((key, i) => (
           <View
             key={key}
-            style={[styles.row, i < PRAYER_KEYS.length - 1 && styles.rowBorder]}
+            style={[styles.row, i < keys.length - 1 && styles.rowBorder]}
           >
             <View style={styles.labelSide}>
               <View style={styles.vakit_iconWrap}>

@@ -11,8 +11,6 @@ interface WeeklySectionProps {
   todayDayIdx: number;
   onPrevWeek: () => void;
   onNextWeek: () => void;
-  chartHeight?: number;
-  onNavigatorHeight?: (height: number) => void;
 }
 
 function WeeklySection(props: WeeklySectionProps) {

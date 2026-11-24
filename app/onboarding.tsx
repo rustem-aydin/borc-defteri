@@ -153,7 +153,8 @@ export default function OnboardingScreen() {
     finishingRef.current = true;
 
     await markOnboardingSeen();
-    router.replace("/calculate?from=onboarding");
+    // Mezhep, hesaplamadan önce seçilir: vitir borcu mezhebe göre değişir.
+    router.replace("/mezhep?from=onboarding");
   }, [router]);
 
   const handleNext = useCallback(() => {

@@ -449,7 +449,7 @@
   },
   "madhab": {
     "title": "Mezhep",
-    "onboardingStep": "SON ADIM",
+    "onboardingStep": "KURULUM",
     "chooseTitle": "Mezhebinizi seçin",
     "chooseSubtitle": "Fıkıh rehberindeki bilgiler yalnızca seçtiğiniz mezhebe göre gösterilir. Seçiminizi ayarlardan her zaman değiştirebilirsiniz.",
     "hanefi": "Hanefi",

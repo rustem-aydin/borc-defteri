@@ -3,10 +3,12 @@ import { usePrayersQuery, usePushUpdate } from "@/hooks/usePrayersQuery";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { DeviceEventEmitter, StyleSheet, View } from "react-native";
+import { useMadhab } from "@/hooks/useMadhab";
 import { VITR_ENABLED_KEY } from "../settings/VitrSection";
 import { PrayerCard } from "./PrayerCard";
 
 export function PrayerGrid() {
+  const { madhab } = useMadhab();
   const [vitrEnabled, setVitrEnabled] = useState(true);
 
   useEffect(() => {
@@ -25,7 +27,9 @@ export function PrayerGrid() {
   const pushUpdate = usePushUpdate();
   const prayers = data?.prayers ?? [];
 
-  const visiblePrayers = vitrEnabled
+  // Vitir yalnızca Hanefi'de borçtur; ayar kapalıysa da gizlenir.
+  const showVitir = vitrEnabled && madhab === "hanefi";
+  const visiblePrayers = showVitir
     ? prayers
     : prayers.filter((prayer) => prayer.vakit_id !== "vitir");
 

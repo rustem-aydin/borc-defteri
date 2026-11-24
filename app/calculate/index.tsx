@@ -5,7 +5,9 @@ import SaveButton from "@/components/screens/calculate/SaveButton";
 import TabBar from "@/components/screens/calculate/TabBar";
 import { makeStyles } from "@/hooks/make-styles";
 import { useKazaForm } from "@/hooks/Usekazaform";
+import { useMadhab } from "@/hooks/useMadhab";
 import { i18n } from "@/lib/i18n";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useRef } from "react";
 import {
@@ -21,6 +23,18 @@ export default function KazaHesaplaScreen() {
   const scrollRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
   const { from } = useLocalSearchParams<{ from?: string }>();
   const isOnboardingFlow = from === "onboarding";
+  const { madhab } = useMadhab();
+  // Şafii'de vitir sünnettir; borç olarak hesaplanmaz.
+  const vitrIsDebt = madhab === "hanefi";
+
+  async function finishFlow() {
+    if (!isOnboardingFlow) {
+      router.back();
+      return;
+    }
+    const protection = await AsyncStorage.getItem("pinProtectionEnabled");
+    router.replace(protection === "false" ? "/home" : "/pin/setup");
+  }
 
   const {
     activeTab,
@@ -41,13 +55,12 @@ export default function KazaHesaplaScreen() {
     setManualField,
     handleSave,
     loading,
-  } = useKazaForm(() => {
-    if (isOnboardingFlow) {
-      router.replace("/mezhep?from=onboarding");
-    } else {
-      router.back();
-    }
-  });
+  } = useKazaForm(
+    () => {
+      void finishFlow();
+    },
+    { vitrEnabled: vitrIsDebt },
+  );
 
   function handleTabChange(tab: "auto" | "manual") {
     setActiveTab(tab);

@@ -449,7 +449,7 @@
   },
   "madhab": {
     "title": "Madhab",
-    "onboardingStep": "LAST STEP",
+    "onboardingStep": "SETUP",
     "chooseTitle": "Choose your madhab",
     "chooseSubtitle": "Guidance in the fiqh section is shown only for the madhab you choose. You can change it later in settings.",
     "hanefi": "Hanafi",

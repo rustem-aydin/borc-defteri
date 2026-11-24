@@ -126,11 +126,9 @@ export type ChartDatum = {
 
 interface StackedBarChartProps {
   data: ChartDatum[];
-  /** Grafiğin toplam yüksekliği (dp); ekrana sığması için üstten ayarlanır. */
-  height?: number;
 }
 
-export function StackedBarChart({ data, height: heightProp }: StackedBarChartProps) {
+export function StackedBarChart({ data }: StackedBarChartProps) {
   const styles = useStyles();
   const { colors: C } = useTheme();
 
@@ -168,7 +166,7 @@ export function StackedBarChart({ data, height: heightProp }: StackedBarChartPro
     };
   }, []);
 
-  const height = Math.max(140, heightProp ?? 220);
+  const height = 220;
   const paddingTop = 24;
   const paddingBottom = 40;
   const paddingLeft = 36;

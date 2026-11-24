@@ -4,6 +4,7 @@ import HomeContent from "@/components/screens/main/HomeContent";
 import { HomeHeader } from "@/components/screens/main/HomeHeader";
 import { HomeSkeleton } from "@/components/screens/main/HomeSkeleton";
 import { makeStyles } from "@/hooks/make-styles";
+import { useMadhab } from "@/hooks/useMadhab";
 import { usePrayersQuery } from "@/hooks/usePrayersQuery";
 import { useTheme } from "@/lib/ThemeContext";
 import { formatDateRange, getEndOfWeek, getStartOfWeek } from "@/lib/utils";
@@ -17,7 +18,18 @@ export default function HomeScreen() {
   const styles = useStyles();
   const { isDark } = useTheme();
   const { data, isLoading } = usePrayersQuery();
-  const totalDebt = data?.totalDebt ?? 0;
+  const { madhab } = useMadhab();
+  // Şafii'de vitir sünnet olduğu için toplam borca katılmaz.
+  const totalDebt = useMemo(() => {
+    const rows = data?.prayers ?? [];
+    return rows.reduce(
+      (acc, row) =>
+        madhab === "safii" && row.vakit_id === "vitir"
+          ? acc
+          : acc + row.kalan_sayi,
+      0,
+    );
+  }, [data, madhab]);
 
   const [viewDate, setViewDate] = useState(new Date());
 
