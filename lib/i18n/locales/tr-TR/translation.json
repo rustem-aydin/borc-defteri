@@ -361,7 +361,10 @@
     "dateOfBirth": "Doğum Tarihi",
     "startedRegularPrayers": "Düzenli Namaza Başlama",
     "ageOfPuberty": "Ergenlik Yaşı",
-    "pubertyHint": "Hanefi'ye göre kızlar için en az 9, erkekler için 12",
+    "pubertyHint": {
+      "hanefi": "Hanefi'ye göre kızlar için en az 9, erkekler için 12",
+      "safii": "Şafii'ye göre ergenlik ay/yıl ile tahmin edilir; 9–12 sınırları yaklaşıktır"
+    },
     "defaultAge": "12 (Varsayılan)"
   },
   "fikhiExemption": {

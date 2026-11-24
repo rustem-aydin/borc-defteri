@@ -361,7 +361,10 @@
     "dateOfBirth": "Date of Birth",
     "startedRegularPrayers": "Started Regular Prayers",
     "ageOfPuberty": "Age of Puberty",
-    "pubertyHint": "Minimum 9 years for girls, 12 for boys in Hanafi",
+    "pubertyHint": {
+      "hanefi": "Minimum 9 years for girls, 12 for boys in Hanafi",
+      "safii": "According to the Shafi'i school, puberty is estimated by month/year; the 9–12 bounds are approximate"
+    },
     "defaultAge": "12 (Default)"
   },
   "fikhiExemption": {
