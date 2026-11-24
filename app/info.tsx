@@ -44,6 +44,8 @@ export default function KazaNamazlariScreen() {
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.scrollContent}
+          bounces={false}
+          overScrollMode="never"
         >
           <HeroSection />
 

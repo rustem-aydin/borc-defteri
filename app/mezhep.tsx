@@ -56,6 +56,8 @@ export default function MadhabScreen() {
         style={styles.scroll}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
+        bounces={false}
+        overScrollMode="never"
       >
         {isOnboarding && (
           <Text style={styles.step}>{i18n.t("madhab.onboardingStep")}</Text>

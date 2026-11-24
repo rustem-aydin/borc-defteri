@@ -116,7 +116,21 @@ function BarTrigger({
 }
 
 // ─── Ana Bileşen ────────────────────────────────────────────────────────────
-export function StackedBarChart({ data }: { data: any[] }) {
+export type ChartSegment = { vakit: string; c: string; h: number };
+export type ChartDatum = {
+  day: string;
+  val: string;
+  color: string;
+  segments: ChartSegment[];
+};
+
+interface StackedBarChartProps {
+  data: ChartDatum[];
+  /** Grafiğin toplam yüksekliği (dp); ekrana sığması için üstten ayarlanır. */
+  height?: number;
+}
+
+export function StackedBarChart({ data, height: heightProp }: StackedBarChartProps) {
   const styles = useStyles();
   const { colors: C } = useTheme();
 
@@ -154,7 +168,7 @@ export function StackedBarChart({ data }: { data: any[] }) {
     };
   }, []);
 
-  const height = 220;
+  const height = Math.max(140, heightProp ?? 220);
   const paddingTop = 24;
   const paddingBottom = 40;
   const paddingLeft = 36;

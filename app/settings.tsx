@@ -24,6 +24,8 @@ export default function SettingsScreen() {
         style={styles.scroll}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
+        bounces={false}
+        overScrollMode="never"
       >
         <HeroSection />
         <View style={styles.sections}>

@@ -69,6 +69,8 @@ export default function KazaHesaplaScreen() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          bounces={false}
+          overScrollMode="never"
         >
           <View style={styles.heading}>
             <Text style={styles.headingTitle}>

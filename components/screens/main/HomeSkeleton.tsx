@@ -37,6 +37,8 @@ export function HomeSkeleton() {
     <ScrollView
       contentContainerStyle={styles.scrollContent}
       showsVerticalScrollIndicator={false}
+      bounces={false}
+      overScrollMode="never"
     >
       {/* WeekNavigator Skeleton */}
       <View style={styles.card}>
