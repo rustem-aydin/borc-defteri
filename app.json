@@ -8,14 +8,6 @@
     "icon": "./assets/logo1.png",
     "userInterfaceStyle": "automatic",
 
-    "build": {
-      "production": {
-        "android": {
-          "buildType": "app-bundle"
-        }
-      }
-    },
-
     "ios": {
       "supportsTablet": true
     },
@@ -26,7 +18,6 @@
         "foregroundImage": "./assets/logo1.png",
         "monochromeImage": "./assets/logo1.png"
       },
-      "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": true,
       "package": "com.rustem_aydin.borcdefteri"
     },
