@@ -9,12 +9,19 @@ import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { migrateDbIfNeeded } from "../lib/db";
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    // Veri yerel SQLite'ta; gereksiz yeniden okumaları önlemek için kısa
+    // staleTime yeterli, yazma yolları invalidate ile tazeliyor.
+    queries: { staleTime: 30_000, gcTime: 5 * 60_000 },
+  },
+});
 
 export const unstable_settings = {
   anchor: "index",
 };
-SplashScreen.hideAsync();
+// Splash'ın tek sahibi burasıdır: gizleme app/index.tsx hazır olduğunda yapılır.
+SplashScreen.preventAutoHideAsync();
 
 function ThemedStack() {
   const { isDark, colors } = useTheme();
@@ -32,7 +39,9 @@ function ThemedStack() {
         }}
       >
         <Stack.Screen name="index" />
+        <Stack.Screen name="onboarding" />
         <Stack.Screen name="home" />
+        <Stack.Screen name="mezhep" />
         <Stack.Screen name="pin/setup" />
         <Stack.Screen name="pin/unlock" />
 

@@ -1,7 +1,7 @@
 import { AppButton } from "@/components/ui/prressable";
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
@@ -87,7 +87,7 @@ export default function PinSetup() {
         <View style={styles.logoRow}>
           <Image
             style={styles.logoImage}
-            source={require("@/assets/logo1.png")}
+            source={require("@/assets/logo-hero.webp")}
             contentFit="contain"
           />
         </View>

@@ -1,6 +1,6 @@
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Image } from "expo-image";
 import { useRouter } from "expo-router";
 import { useEffect, useState } from "react";
@@ -59,7 +59,7 @@ export default function PinUnlock() {
         <View style={styles.logoRow}>
           <Image
             style={{ width: 120, height: 120, borderRadius: 20 }}
-            source={require("@/assets/logo1.png")}
+            source={require("@/assets/logo-hero.webp")}
             contentFit="contain"
           />
         </View>
