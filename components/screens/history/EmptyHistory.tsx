@@ -1,5 +1,5 @@
 import { makeStyles } from "@/hooks/make-styles";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { Text, View } from "react-native";
 

@@ -14,11 +14,7 @@ export default function HistoryScreen() {
     <SafeAreaView style={[styles.container]}>
       <Header title={i18n.t("gecmis")} />
       <View style={{ flex: 1 }}>
-        <HistoryList
-          sections={data?.sections ?? []}
-          weeklyCount={data?.weeklyCount ?? 0}
-          isLoading={isLoading}
-        />
+        <HistoryList sections={data ?? []} isLoading={isLoading} />
       </View>
       <View style={styles.blobTopRight} pointerEvents="none" />
       <View style={styles.blobBottomLeft} pointerEvents="none" />

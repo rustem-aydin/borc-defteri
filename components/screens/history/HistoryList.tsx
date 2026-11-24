@@ -1,9 +1,11 @@
 import { makeStyles } from "@/hooks/make-styles";
-import { GroupedLog } from "@/hooks/useHistoryQuery";
+import type { GroupedLog } from "@/hooks/useHistoryQuery";
+import { flattenHistorySections } from "@/lib/historySections";
 import { FlashList } from "@shopify/flash-list";
-import { View } from "react-native";
+import { useMemo } from "react";
+import { Text, View } from "react-native";
+import { ActivityItem } from "./ActivityItem";
 import { EmptyHistory } from "./EmptyHistory";
-import { SectionGroup } from "./SectionGroup";
 
 const SkeletonRow = () => {
   const styles = useStyles();
@@ -33,14 +35,13 @@ function SkeletonList() {
 
 export function HistoryList({
   sections,
-  weeklyCount,
   isLoading,
 }: {
   sections: GroupedLog[];
-  weeklyCount: number;
   isLoading?: boolean;
 }) {
   const styles = useStyles();
+  const items = useMemo(() => flattenHistorySections(sections), [sections]);
 
   return (
     <View style={{ flex: 1 }}>
@@ -56,9 +57,30 @@ export function HistoryList({
       )}
 
       <FlashList
-        data={sections}
-        keyExtractor={(item) => item.title}
-        renderItem={({ item }) => <SectionGroup item={item} />}
+        data={items}
+        keyExtractor={(item) => item.key}
+        getItemType={(item) => item.type}
+        renderItem={({ item }) =>
+          item.type === "header" ? (
+            <View
+              style={[
+                styles.sectionHeader,
+                item.isFirst && styles.sectionHeaderFirst,
+              ]}
+            >
+              <Text style={styles.sectionSubtitle}>
+                {item.subtitle || "GEÇMİŞ"}
+              </Text>
+              <Text style={styles.sectionTitle}>{item.title}</Text>
+            </View>
+          ) : (
+            <ActivityItem
+              item={item.log}
+              isFirst={item.isFirst}
+              isLast={item.isLast}
+            />
+          )
+        }
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
         ListEmptyComponent={!isLoading ? <EmptyHistory /> : null}
@@ -70,6 +92,27 @@ export function HistoryList({
 const useStyles = makeStyles((C) => ({
   content: {
     paddingHorizontal: 24,
+  },
+  sectionHeader: {
+    marginTop: 24,
+    marginBottom: 12,
+    paddingHorizontal: 4,
+  },
+  sectionHeaderFirst: {
+    marginTop: 0,
+  },
+  sectionTitle: {
+    fontSize: 20,
+    fontWeight: "800",
+    color: C.onSurface,
+  },
+  sectionSubtitle: {
+    fontSize: 10,
+    fontWeight: "700",
+    color: C.primary,
+    letterSpacing: 1,
+    textTransform: "uppercase",
+    marginBottom: 2,
   },
   skeletonContainer: {
     flex: 1,

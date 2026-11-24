@@ -1,8 +1,9 @@
 import { i18n } from "@/lib/i18n";
 import { useQuery } from "@tanstack/react-query";
+import type { SQLiteDatabase } from "expo-sqlite";
 import { useSQLiteContext } from "expo-sqlite";
 
-interface HistoryLog {
+export interface HistoryLog {
   id: number;
   tarih: string;
   islem: number;
@@ -14,6 +15,9 @@ export interface GroupedLog {
   subtitle: string;
   data: HistoryLog[];
 }
+
+/** Geçmiş listesinde gösterilen gün sayısı (bugün dahil). */
+export const HISTORY_DAYS = 7;
 
 // i18n'den alınan sabit diziler - doğru key path'leri
 const MONTHS = [
@@ -41,28 +45,29 @@ const DAYS = [
   i18n.t("days.6"),
 ];
 
-function groupLogs(logs: HistoryLog[]): {
-  sections: GroupedLog[];
-  weeklyCount: number;
-} {
-  const today = new Date();
+/** Listede gösterilen ilk günün yerel gece yarısı. */
+export function getHistoryCutoff(now = new Date()): Date {
+  const cutoff = new Date(now);
+  cutoff.setHours(0, 0, 0, 0);
+  cutoff.setDate(cutoff.getDate() - (HISTORY_DAYS - 1));
+  return cutoff;
+}
+
+function groupLogs(logs: HistoryLog[], now = new Date()): GroupedLog[] {
+  const today = new Date(now);
   today.setHours(0, 0, 0, 0);
   const yesterday = new Date(today);
   yesterday.setDate(yesterday.getDate() - 1);
 
-  const oneWeekAgo = new Date(today);
-  oneWeekAgo.setDate(oneWeekAgo.getDate() - 6);
+  const cutoff = getHistoryCutoff(now);
 
-  let weeklyCount = 0;
   const groupedMap = new Map<string, HistoryLog[]>();
 
   logs.forEach((log) => {
-    const d = new Date(log.tarih);
-    const logDate = new Date(d);
+    const logDate = new Date(log.tarih);
     logDate.setHours(0, 0, 0, 0);
 
-    if (logDate < oneWeekAgo) return;
-    if (log.islem < 0) weeklyCount += Math.abs(log.islem);
+    if (logDate < cutoff) return;
 
     let groupKey: string;
     if (logDate.getTime() === today.getTime()) groupKey = "today";
@@ -97,19 +102,19 @@ function groupLogs(logs: HistoryLog[]): {
     }
   });
 
-  return { sections, weeklyCount };
+  return sections;
 }
 
 // Query options — hem hook hem prefetch için ortak
-export const historyQueryOptions = (
-  db: ReturnType<typeof useSQLiteContext>,
-) => ({
+export const historyQueryOptions = (db: SQLiteDatabase) => ({
   queryKey: ["history", "last7days"] as const,
   queryFn: async () => {
+    // Yalnızca listede gösterilen günler ve gösterilen kolonlar okunur.
     const logs = await db.getAllAsync<HistoryLog>(
-      `SELECT * FROM history_logs 
-       WHERE tarih >= datetime('now', '-7 days') 
+      `SELECT id, tarih, islem, vakit_id FROM history_logs
+       WHERE tarih >= ?
        ORDER BY tarih DESC`,
+      [getHistoryCutoff().toISOString()],
     );
     return groupLogs(logs);
   },
