@@ -1,4 +1,4 @@
-import { TabInfoProps } from "@/constants/colors";
+import { MadhabProps } from "@/constants/colors";
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import React from "react";
@@ -11,7 +11,7 @@ type FaqItemType = {
   answer: string;
 };
 
-export function FaqSection({ mezhep = "hanefi" }: TabInfoProps) {
+export function FaqSection({ mezhep = "hanefi" }: MadhabProps) {
   const styles = useStyles();
 
   const faqData = i18n.t(`info.${mezhep}.faq`, {

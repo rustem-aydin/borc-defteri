@@ -2,6 +2,7 @@ import { Header } from "@/components/Header";
 import { AppearanceSection } from "@/components/screens/settings/AppearanceSection";
 import { CalculationSection } from "@/components/screens/settings/CalculationSection";
 import { HeroSection } from "@/components/screens/settings/HeroSection";
+import { MadhabSection } from "@/components/screens/settings/MadhabSection";
 import { NotificationsSection } from "@/components/screens/settings/NotificationsSection";
 import { SecuritySection } from "@/components/screens/settings/SecuritySection";
 import { SupportSection } from "@/components/screens/settings/SupportSection";
@@ -27,6 +28,7 @@ export default function SettingsScreen() {
         <HeroSection />
         <View style={styles.sections}>
           <VitrSection />
+          <MadhabSection />
           <TargetSection />
           {/* <LanguageSection /> */}
           <AppearanceSection />

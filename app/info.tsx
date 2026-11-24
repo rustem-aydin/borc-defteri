@@ -1,5 +1,12 @@
-import React, { useState } from "react";
-import { ScrollView, StatusBar, Text, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import React from "react";
+import {
+  ActivityIndicator,
+  Pressable,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { Header } from "@/components/Header";
@@ -9,52 +16,76 @@ import { HeroSection } from "@/components/screens/info/Herosection";
 import { KazaNedirCard } from "@/components/screens/info/Kazanedircard";
 import { MekruhVakitlerCard } from "@/components/screens/info/Mekruhvakitlercard";
 import { NasilKilinirCard } from "@/components/screens/info/Nasilkilinircard";
-import TabBarInfo from "@/components/screens/info/TabBar";
 import { TertipSahibiCard } from "@/components/screens/info/Tertipsahibicard";
 import { makeStyles } from "@/hooks/make-styles";
+import { useMadhab } from "@/hooks/useMadhab";
 import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
-import { TabInfo } from "../constants/colors";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { useRouter } from "expo-router";
 
 export default function KazaNamazlariScreen() {
   const styles = useStyles();
-  const { isDark } = useTheme();
-  const [activeTab, setActiveTab] = useState<TabInfo>("hanefi");
+  const { isDark, colors } = useTheme();
+  const router = useRouter();
+  const { madhab, ready } = useMadhab();
 
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
-      <StatusBar
-        barStyle={isDark ? "light-content" : "dark-content"}
-        backgroundColor={styles.safeArea.backgroundColor}
-      />
+      <StatusBar style={isDark ? "light" : "dark"} />
 
       <Header title={i18n.t("headers.bilgi")} />
 
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
-        <HeroSection />
-        <TabBarInfo active={activeTab} onChange={setActiveTab} />
-
-        <View style={styles.formArea}>
-          <KazaNedirCard mezhep={activeTab} />
-          <HangiNamazlarCard mezhep={activeTab} />
-          <NasilKilinirCard mezhep={activeTab} />
-          <TertipSahibiCard mezhep={activeTab} />
-          <MekruhVakitlerCard mezhep={activeTab} />
-          <FaqSection mezhep={activeTab} />
+      {!ready ? (
+        <View style={styles.loading}>
+          <ActivityIndicator color={colors.primary} />
         </View>
+      ) : (
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          <HeroSection />
 
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            Verilen bilgiler Diyanet İşleri Başkanlığı ve muteber fıkıh
-            kaynakları esas alınarak hazırlanmıştır. Özel durumlar için bir
-            fıkıh alimine danışılması tavsiye edilir.
-          </Text>
-          <Text style={styles.footerIcon}>🌿</Text>
-        </View>
-      </ScrollView>
+          <View style={styles.madhabBar}>
+            <View style={styles.madhabInfo}>
+              <MaterialIcons
+                name="menu-book"
+                size={18}
+                color={colors.primary}
+              />
+              <Text style={styles.madhabText}>
+                {i18n.t("info.madhabInfo", {
+                  madhab: i18n.t(`madhab.${madhab}`),
+                })}
+              </Text>
+            </View>
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => router.push("/mezhep?from=info")}
+              hitSlop={8}
+            >
+              <Text style={styles.madhabChangeText}>
+                {i18n.t("info.changeMadhab")}
+              </Text>
+            </Pressable>
+          </View>
+
+          <View style={styles.formArea}>
+            <KazaNedirCard mezhep={madhab} />
+            <HangiNamazlarCard mezhep={madhab} />
+            <NasilKilinirCard mezhep={madhab} />
+            <TertipSahibiCard mezhep={madhab} />
+            <MekruhVakitlerCard mezhep={madhab} />
+            <FaqSection mezhep={madhab} />
+          </View>
+
+          <View style={styles.footer}>
+            <Text style={styles.footerText}>{i18n.t("info.footer")}</Text>
+            <Text style={styles.footerIcon}>🌿</Text>
+          </View>
+        </ScrollView>
+      )}
       <View style={styles.blobTopRight} pointerEvents="none" />
       <View style={styles.blobBottomLeft} pointerEvents="none" />
     </SafeAreaView>
@@ -66,14 +97,48 @@ const useStyles = makeStyles((C) => ({
     flex: 1,
     backgroundColor: C.surface,
   },
-  formArea: {
-    paddingTop: 16,
-    paddingBottom: 8,
-    gap: 16,
+  loading: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
   },
   scrollContent: {
     paddingHorizontal: 20,
     paddingBottom: 24,
+  },
+  madhabBar: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    marginBottom: 16,
+    borderRadius: 16,
+    backgroundColor: C.surfaceContainerLowest,
+  },
+  madhabInfo: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    flex: 1,
+  },
+  madhabText: {
+    flex: 1,
+    fontSize: 13,
+    lineHeight: 18,
+    fontWeight: "500",
+    color: C.onSurfaceVariant,
+  },
+  madhabChangeText: {
+    fontSize: 13,
+    fontWeight: "700",
+    color: C.primary,
+  },
+  formArea: {
+    paddingTop: 4,
+    paddingBottom: 8,
+    gap: 16,
   },
   footer: {
     alignItems: "center",

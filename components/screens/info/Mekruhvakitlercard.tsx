@@ -1,4 +1,4 @@
-import { TabInfoProps } from "@/constants/colors";
+import { MadhabProps } from "@/constants/colors";
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import React from "react";
@@ -197,7 +197,7 @@ function SunArc({ C }: { C: any }) {
   );
 }
 
-export function MekruhVakitlerCard({ mezhep = "hanefi" }: TabInfoProps) {
+export function MekruhVakitlerCard({ mezhep = "hanefi" }: MadhabProps) {
   const styles = useStyles();
   const prefix = `info.${mezhep}.kerahat`;
 
