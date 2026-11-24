@@ -22,7 +22,7 @@ interface TextProps extends RNTextProps {
   children: React.ReactNode;
 }
 
-export const Text = forwardRef<RNText, TextProps>(
+export const Text = forwardRef<React.ComponentRef<typeof RNText>, TextProps>(
   (
     { variant = 'body', lightColor, darkColor, style, children, ...props },
     ref
@@ -84,3 +84,5 @@ export const Text = forwardRef<RNText, TextProps>(
     );
   }
 );
+
+Text.displayName = 'Text';

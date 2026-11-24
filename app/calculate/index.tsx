@@ -6,7 +6,7 @@ import TabBar from "@/components/screens/calculate/TabBar";
 import { makeStyles } from "@/hooks/make-styles";
 import { useKazaForm } from "@/hooks/Usekazaform";
 import { i18n } from "@/lib/i18n";
-import { useNavigation } from "@react-navigation/native";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useRef } from "react";
 import {
   KeyboardAvoidingView,
@@ -18,8 +18,9 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function KazaHesaplaScreen() {
-  const navigation = useNavigation();
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<React.ComponentRef<typeof ScrollView>>(null);
+  const { from } = useLocalSearchParams<{ from?: string }>();
+  const isOnboardingFlow = from === "onboarding";
 
   const {
     activeTab,
@@ -41,7 +42,11 @@ export default function KazaHesaplaScreen() {
     handleSave,
     loading,
   } = useKazaForm(() => {
-    navigation.goBack();
+    if (isOnboardingFlow) {
+      router.replace("/mezhep?from=onboarding");
+    } else {
+      router.back();
+    }
   });
 
   function handleTabChange(tab: "auto" | "manual") {
