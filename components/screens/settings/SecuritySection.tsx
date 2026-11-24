@@ -2,7 +2,7 @@ import { makeStyles } from "@/hooks/make-styles";
 import { hasPin } from "@/lib/auth";
 import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useState } from "react";

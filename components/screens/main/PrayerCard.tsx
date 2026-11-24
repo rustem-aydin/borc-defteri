@@ -3,7 +3,7 @@ import { useToast } from "@/components/ui/toast";
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Image, Text, Vibration, View } from "react-native";
 
 interface PrayerCardProps {

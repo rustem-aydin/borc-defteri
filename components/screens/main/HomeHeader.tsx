@@ -3,7 +3,7 @@ import { AppButton } from "@/components/ui/prressable";
 import { makeStyles } from "@/hooks/make-styles";
 import { historyQueryOptions } from "@/hooks/useHistoryQuery";
 import { useTheme } from "@/lib/ThemeContext";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "expo-router";
 import { useSQLiteContext } from "expo-sqlite";
