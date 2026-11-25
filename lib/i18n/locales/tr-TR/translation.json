@@ -405,47 +405,57 @@
     "next": "Devam",
     "start": "Başla",
     "slides": {
-      "welcome": {
-        "eyebrow": "HOŞ GELDİNİZ",
-        "title": "Kaza borcunuzu tek yerde takip edin",
-        "description": "Geçmişte kılamadığınız namazları hesaplayın; her kıldığınız kaza ile borcunuz adım adım azalsın.",
-        "features": {
-          "one": "Altı vakit için ayrı borç takibi",
-          "two": "Tüm veriler yalnızca cihazınızda",
-          "three": "Türkçe ve İngilizce arayüz"
-        }
-      },
-      "calculation": {
-        "eyebrow": "BORÇ HESABI",
-        "title": "Borçunuzu size uygun yöntemle belirleyin",
-        "description": "Doğum tarihinizden otomatik hesaplayın veya bildiğiniz sayıları vakit vakit kendiniz girin.",
-        "features": {
-          "one": "Doğum tarihi ve ergenlik yaşına göre otomatik hesap",
-          "two": "Hayz ve nifas muafiyetlerini dikkate alır",
-          "three": "Dilediğinizde manuel sayı girişi"
-        }
-      },
-      "tracking": {
-        "eyebrow": "GÜNLÜK TAKİP",
-        "title": "Her kaza namazını tek dokunuşla işaretleyin",
-        "description": "Kıldığınız kazayı ekleyin, borcunuz anında düşsün. Haftalık grafikte ilerlemenizi görün.",
-        "features": {
-          "one": "Vakit kartlarından hızlı kayıt",
-          "two": "Günlük hedef ve haftalık özet",
-          "three": "Vitir namazını isteğe göre dahil etme"
-        }
-      },
-      "privacy": {
-        "eyebrow": "GÜVENLİ VE YEREL",
-        "title": "Kayıtlarınız ve gizliliğiniz sizin elinizde",
-        "description": "Geçmişinizi inceleyin, fıkhi bilgi rehberine ulaşın; uygulamanızı PIN ile koruyun.",
-        "features": {
-          "one": "Tüm kaza kayıtlarının geçmişi",
-          "two": "Hanefi ve Şafii fıkhına göre bilgi rehberi",
-          "three": "PIN kilidi, açık/koyu tema"
-        }
+    "welcome": {
+      "eyebrow": "ANA EKRAN",
+      "title": "Borcunuz tek bakışta",
+      "description": "Açılışta haftalık grafik ve altında vakit kartları: her kartta kalan kaza sayısı, altında tek dokunuşluk − ve + düğmeleri.",
+      "features": {
+        "one": "Haftanın kılınan / toplam kaza sayısı",
+        "two": "Hedef çizgisiyle günlük planınız",
+        "three": "Altı vakit için ayrı borç: Sabah…Vitir"
+      }
+    },
+    "calculation": {
+      "eyebrow": "HESAPLAMA EKRANI",
+      "title": "Borcu bir kez, doğru hesaplayın",
+      "description": "Doğum tarihi ile düzenli namaza başladığınız tarihi girin; ergenlik yaşı, hayz ve nifas günleri hesaba katılır. İsterseniz manuel girişe geçin.",
+      "features": {
+        "one": "Otomatik hesap: tarihler ve muafiyetler",
+        "two": "Manuel girişte vakit vakit sayı girin",
+        "three": "Kaydettiğinizde borç listesi güncellenir"
+      }
+    },
+    "madhab": {
+      "eyebrow": "MEZHEP SEÇİMİ",
+      "title": "Önce mezhebinizi seçin",
+      "description": "Fıkhi hükümler mezhebe göre değişir; seçiminiz hem hesaplamayı hem bilgi ekranını belirler. Hanefi'de vitir vacip, Şafii'de sünnettir ve borca eklenmez.",
+      "features": {
+        "one": "Hanefi ve Şafii seçenekleri",
+        "two": "Seçim ayarlardan her zaman değişir",
+        "three": "Şafii'de vitir borç listesinde görünmez"
+      }
+    },
+    "info": {
+      "eyebrow": "FIKIH REHBERİ",
+      "title": "Yalnız kendi mezhebinizin hükümleri",
+      "description": "Bilgi ekranındaki kartlar seçtiğiniz mezhebe göre yazılır: kaza nedir, hangi namazlar kaza edilir, tertip, kerahat vakitleri ve sık sorulanlar.",
+      "features": {
+        "one": "Kartlar seçili mezhebe göre filtrelenir",
+        "two": "Kerahat vakitleri görsel olarak",
+        "three": "Değiştir düğmesiyle mezhebi anında değiştirin"
+      }
+    },
+    "history": {
+      "eyebrow": "GEÇMİŞ",
+      "title": "Her işlem kayıtlı",
+      "description": "Kıldığınız her kaza geçmişe düşer; gün grupları ve haftalık özetle ilerlemenizi görürsünüz. Kayıtlar cihazınızda kalır, PIN ile korunur.",
+      "features": {
+        "one": "Gün gruplarına ayrılmış işlem geçmişi",
+        "two": "Haftalık özet ve toplam",
+        "three": "Veriler cihazda; PIN kilidi"
       }
     }
+  }
   },
   "madhab": {
     "title": "Mezhep",

@@ -4,13 +4,13 @@ import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import { markOnboardingSeen } from "@/lib/onboarding";
 import { useTheme } from "@/lib/ThemeContext";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   FlatList,
+  Image,
+  ImageSourcePropType,
   NativeScrollEvent,
   NativeSyntheticEvent,
   Pressable,
@@ -20,32 +20,51 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-type SlideId = "welcome" | "calculation" | "tracking" | "privacy";
+type SlideId = "welcome" | "calculation" | "madhab" | "info" | "history";
 type Accent = "primary" | "tertiary";
 
 type SlideMeta = {
   id: SlideId;
-  icon: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
+  /** Uygulamanın gerçek ekran görüntüsü (assets/onboarding). */
+  image: ImageSourcePropType;
   accent: Accent;
 };
 
 const SLIDES: SlideMeta[] = [
-  { id: "welcome", icon: "mosque", accent: "primary" },
+  {
+    id: "welcome",
+    image: require("@/assets/onboarding/home.webp"),
+    accent: "primary",
+  },
   {
     id: "calculation",
-    icon: "calculator-variant-outline",
+    image: require("@/assets/onboarding/calculate.webp"),
     accent: "tertiary",
   },
-  { id: "tracking", icon: "calendar-check-outline", accent: "primary" },
-  { id: "privacy", icon: "shield-lock-outline", accent: "primary" },
+  {
+    id: "madhab",
+    image: require("@/assets/onboarding/mezhep.webp"),
+    accent: "primary",
+  },
+  {
+    id: "info",
+    image: require("@/assets/onboarding/info.webp"),
+    accent: "tertiary",
+  },
+  {
+    id: "history",
+    image: require("@/assets/onboarding/history.webp"),
+    accent: "primary",
+  },
 ];
 
 const FEATURE_KEYS = ["one", "two", "three"] as const;
 
-function getGradient(accent: Accent, colors: ColorScheme): [string, string] {
-  return accent === "tertiary"
-    ? [colors.tertiary, colors.tertiaryContainer]
-    : [colors.primary, colors.primaryContainer];
+/** Ekran görüntüsünün en-boy oranı (540 x 1212). */
+const SHOT_RATIO = 540 / 1212;
+
+function getAccentColor(accent: Accent, colors: ColorScheme): string {
+  return accent === "tertiary" ? colors.tertiary : colors.primary;
 }
 
 function OnboardingSlide({
@@ -61,40 +80,36 @@ function OnboardingSlide({
 }) {
   const styles = useStyles();
   const { colors } = useTheme();
-  const accentColor =
-    slide.accent === "tertiary" ? colors.tertiary : colors.primary;
+  const accentColor = getAccentColor(slide.accent, colors);
+
+  // Ekran görüntüsü slayt yüksekliğine göre ölçeklenir; küçük ekranda da taşmaz.
+  const shotHeight =
+    height > 0
+      ? Math.min(Math.max(Math.round(height * 0.46), 150), compact ? 250 : 320)
+      : compact
+        ? 230
+        : 290;
+  const shotWidth = Math.round(shotHeight * SHOT_RATIO);
 
   return (
     <View style={[styles.slide, { width }, height > 0 ? { height } : null]}>
       <View style={styles.slideInner}>
         <View
           style={[
-            styles.illustration,
+            styles.shotFrame,
             {
-              width: compact ? 112 : 148,
-              height: compact ? 112 : 148,
+              width: shotWidth,
+              height: shotHeight,
+              borderColor: colors.outlineVariant,
             },
           ]}
         >
-          <View
-            style={[styles.glow, { backgroundColor: accentColor }]}
-            pointerEvents="none"
+          <Image
+            source={slide.image}
+            style={styles.shot}
+            resizeMode="cover"
+            accessibilityIgnoresInvertColors
           />
-          <LinearGradient
-            colors={getGradient(slide.accent, colors)}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={[
-              styles.iconBox,
-              { borderRadius: compact ? 34 : 44 },
-            ]}
-          >
-            <MaterialCommunityIcons
-              name={slide.icon}
-              size={compact ? 58 : 74}
-              color={colors.onPrimary}
-            />
-          </LinearGradient>
         </View>
 
         <Text style={[styles.eyebrow, { color: accentColor }]}>
@@ -309,27 +324,20 @@ const useStyles = makeStyles((C) => ({
     paddingHorizontal: 28,
     paddingVertical: 8,
   },
-  illustration: {
-    alignItems: "center",
-    justifyContent: "center",
+  shotFrame: {
+    borderRadius: 22,
+    borderWidth: 1,
+    overflow: "hidden",
+    backgroundColor: C.surfaceContainerLowest,
+    shadowColor: C.primary,
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.14,
+    shadowRadius: 24,
+    elevation: 8,
   },
-  glow: {
-    position: "absolute",
-    width: "150%",
-    height: "150%",
-    borderRadius: 999,
-    opacity: 0.06,
-  },
-  iconBox: {
+  shot: {
     width: "100%",
     height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: C.primary,
-    shadowOffset: { width: 0, height: 14 },
-    shadowOpacity: 0.16,
-    shadowRadius: 26,
-    elevation: 8,
   },
   eyebrow: {
     marginTop: 28,
