@@ -1,4 +1,5 @@
 import { ToastProvider } from "@/components/ui/toast";
+import { useEffect } from "react";
 import "@/lib/i18n";
 import { ThemeProvider, useTheme } from "@/lib/ThemeContext"; // useTheme EKLENDİ
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -9,6 +10,7 @@ import { View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { migrateDbIfNeeded } from "../lib/db";
+import { reconcileDailyReminder } from "@/lib/notifications";
 const queryClient = new QueryClient({
   defaultOptions: {
     // Veri yerel SQLite'ta; gereksiz yeniden okumaları önlemek için kısa
@@ -25,6 +27,11 @@ SplashScreen.preventAutoHideAsync();
 
 function ThemedStack() {
   const { isDark, colors } = useTheme();
+
+  // Ayar açıksa ve zamanlanmış bildirim kaybolmuşsa açılışta yeniden kurar.
+  useEffect(() => {
+    void reconcileDailyReminder();
+  }, []);
 
   const screenBackgroundColor =
     colors?.surface || (isDark ? "#000000" : "#FFFFFF");

@@ -340,7 +340,14 @@
     "reminderTime": "Reminder Time",
     "selectTime": "Select Time",
     "done": "Done"
-  },
+  ,
+    "channelName": "Daily reminder",
+    "permissionDenied": "Notifications are off",
+    "permissionDeniedMessage": "Allow notifications in system settings so the daily reminder can be scheduled.",
+    "openSettings": "Open settings",
+    "cancel": "Cancel",
+    "error": "Reminder not set",
+    "errorMessage": "The notification could not be scheduled. Please try again."},
   "security": {
     "title": "Security",
     "pinProtection": "PIN Protection",

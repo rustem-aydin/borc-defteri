@@ -340,7 +340,14 @@
     "reminderTime": "Hatırlatma Saati",
     "selectTime": "Saat Seç",
     "done": "Tamam"
-  },
+  ,
+    "channelName": "Günlük hatırlatıcı",
+    "permissionDenied": "Bildirim izni kapalı",
+    "permissionDeniedMessage": "Hatırlatıcıyı kurabilmek için sistem ayarlarından bildirim iznini açmanız gerekiyor.",
+    "openSettings": "Ayarları aç",
+    "cancel": "Vazgeç",
+    "error": "Hatırlatıcı kurulamadı",
+    "errorMessage": "Bildirim zamanlanamadı. Lütfen tekrar deneyin."},
   "security": {
     "title": "Güvenlik",
     "pinProtection": "PIN Koruması",
