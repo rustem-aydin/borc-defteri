@@ -14,6 +14,12 @@ export interface PrayersData {
 
 export const PRAYERS_KEY = ["prayers"] as const;
 
+/**
+ * Aynı anda gelen iki dokunuş iki SQLite transaction'ını iç içe açıyordu
+ * ("cannot start a transaction within a transaction"). Yazımlar sıraya alınır.
+ */
+let writeQueue: Promise<void> = Promise.resolve();
+
 export function usePrayersQuery() {
   const db = useSQLiteContext();
 
@@ -62,7 +68,7 @@ export function usePushUpdate() {
 
       const tarih = new Date().toISOString();
 
-      try {
+      const runWrite = async () => {
         await db.withTransactionAsync(async () => {
           await db.runAsync(
             "INSERT INTO history_logs (tarih, islem, vakit_id) VALUES (?, ?, ?)",
@@ -74,11 +80,12 @@ export function usePushUpdate() {
             [change, vakit_id],
           );
         });
-      } catch (error) {
-        // DB yazımı başarısızsa iyimser değeri gerçek veriyle düzelt.
+      };
+      // Yazım sıraya alınır; çağıran bekletilmez (iyimser güncelleme zaten yapıldı).
+      writeQueue = writeQueue.then(runWrite, runWrite).catch((error) => {
+        console.warn("Kaza kaydı yazılamadı", error);
         queryClient.invalidateQueries({ queryKey: PRAYERS_KEY });
-        throw error;
-      }
+      });
 
       queryClient.invalidateQueries({ queryKey: PRAYERS_KEY });
       queryClient.invalidateQueries({ queryKey: ["weeklyHistory"] });

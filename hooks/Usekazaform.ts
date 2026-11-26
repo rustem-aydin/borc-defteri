@@ -1,5 +1,6 @@
 import { Gender, Tab } from "@/constants/colors";
 import { PRAYER_KEYS } from "@/lib/db";
+import { PRAYERS_KEY } from "@/hooks/usePrayersQuery";
 import { i18n } from "@/lib/i18n";
 import { useQueryClient } from "@tanstack/react-query";
 import { useSQLiteContext } from "expo-sqlite";
@@ -148,9 +149,15 @@ export function useKazaForm(
       }
     });
 
-    // Kalan borç, haftalık grafik, son işlem ve geçmiş aynı kaynaktan beslendiği
-    // için hepsi tek yerden tazelenir.
-    queryClient.invalidateQueries();
+    // Kalan borç, haftalık grafik, son işlem ve geçmiş aynı kaynaktan beslenir.
+    // Yalnız bu dört sorgu tazelenir; anahtarsız invalidate alakasız sorguları da
+    // yeniden çalıştırıyordu.
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: PRAYERS_KEY }),
+      queryClient.invalidateQueries({ queryKey: ["weeklyHistory"] }),
+      queryClient.invalidateQueries({ queryKey: ["lastPrayer"] }),
+      queryClient.invalidateQueries({ queryKey: ["history"] }),
+    ]);
   }
 
   function validateManualCounts(counts: Record<string, number>): { valid: boolean; error?: string } {
