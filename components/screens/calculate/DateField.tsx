@@ -1,5 +1,6 @@
 import { C } from "@/constants/colors";
 import { makeStyles } from "@/hooks/make-styles";
+import { i18n } from "@/lib/i18n";
 import React, { useState } from "react";
 import { Text, TextInput, View } from "react-native";
 
@@ -29,7 +30,7 @@ export default function DateField({
   value,
   onChange,
   info,
-  placeholder = "GG.AA.YYYY",
+  placeholder = i18n.t("autoForm.datePlaceholder"),
   keyboardType = "numeric",
 }: Props) {
   const [focused, setFocused] = useState(false);

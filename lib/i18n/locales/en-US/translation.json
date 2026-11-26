@@ -367,6 +367,7 @@
   "autoForm": {
     "dateOfBirth": "Date of Birth",
     "startedRegularPrayers": "Started Regular Prayers",
+    "datePlaceholder": "DD.MM.YYYY",
     "ageOfPuberty": "Age of Puberty",
     "pubertyHint": {
       "hanefi": "Minimum 9 years for girls, 12 for boys in Hanafi",

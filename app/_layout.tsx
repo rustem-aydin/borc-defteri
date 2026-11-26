@@ -70,10 +70,18 @@ function ThemedStack() {
         />
         <Stack.Screen
           name="calculate/index"
-          options={{
-            presentation: "modal",
-            animation: "fade",
-            contentStyle: { backgroundColor: "transparent" },
+          options={({ route }) => {
+            // Onboarding akışında mezhep ekranı calculate ile değiştirilir; o
+            // anda calculate yığının tek ekranı olur ve modal bir ekranın
+            // altında taban ekran bulunamaz. Bu durumda kart olarak açılır
+            // (zaten native stack de öyle render ediyor). Diğer girişlerde
+            // (home, settings) modal olarak açılmaya devam eder.
+            const from = (route.params as { from?: string } | undefined)?.from;
+            return {
+              presentation: from === "onboarding" ? "card" : "modal",
+              animation: "fade",
+              contentStyle: { backgroundColor: "transparent" },
+            };
           }}
         />
       </Stack>

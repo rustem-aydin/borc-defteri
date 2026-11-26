@@ -367,6 +367,7 @@
   "autoForm": {
     "dateOfBirth": "Doğum Tarihi",
     "startedRegularPrayers": "Düzenli Namaza Başlama",
+    "datePlaceholder": "GG.AA.YYYY",
     "ageOfPuberty": "Ergenlik Yaşı",
     "pubertyHint": {
       "hanefi": "Hanefi'ye göre kızlar için en az 9, erkekler için 12",
