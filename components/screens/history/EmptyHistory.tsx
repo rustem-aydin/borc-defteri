@@ -1,5 +1,6 @@
 import { makeStyles } from "@/hooks/make-styles";
-import { MaterialIcons } from "@expo/vector-icons";
+import { i18n } from "@/lib/i18n";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { Text, View } from "react-native";
 
@@ -14,7 +15,7 @@ export function EmptyHistory() {
         size={48}
         color={styles._colors.outlineVariant}
       />
-      <Text style={styles.emptyText}>Henüz geçmiş işlemi bulunmuyor.</Text>
+      <Text style={styles.emptyText}>{i18n.t("history.empty")}</Text>
     </View>
   );
 }

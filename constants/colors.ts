@@ -77,9 +77,9 @@ export const VAKIT_LABELS: Record<string, string> = {
 
 export type Gender = "erkek" | "kadin";
 export type Tab = "auto" | "manual";
-export type TabInfo = "hanefi" | "safii" | "maliki" | "hanbeli";
-export interface TabInfoProps {
-  mezhep: TabInfo; // Buraya sadece 'hanefi' veya 'safii' gelebilir
+export type Madhab = "hanefi" | "safii";
+export interface MadhabProps {
+  mezhep: Madhab;
 }
 
 export const DARK = {

@@ -1,10 +1,11 @@
 import { makeStyles } from "@/hooks/make-styles";
+import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useRouter } from "expo-router";
 import { Pressable, Text, View } from "react-native";
 
-export function Header({ title = "Geçmiş" }: any) {
+export function Header({ title = i18n.t("headers.gecmis") }: any) {
   const router = useRouter();
   const styles = useStyles();
   const { colors: C } = useTheme();

@@ -1,4 +1,5 @@
 import { C } from "@/constants/colors";
+import { i18n } from "@/lib/i18n";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -37,22 +38,22 @@ export function DataSection() {
     <View style={styles.container}>
       <View style={styles.sectionHeader}>
         <MaterialIcons name="dns" size={22} color={C.primary} />
-        <Text style={styles.sectionTitle}>Veri</Text>
+        <Text style={styles.sectionTitle}>{i18n.t("settings.dataSection.title")}</Text>
       </View>
       <View style={styles.grid}>
         <DataCard
           icon="cloud-upload"
           iconBg={C.secondaryContainer}
           iconColor={C.onSecondaryContainer}
-          title="Bulut Yedekleme"
-          subtitle="Verilerinizi cihazlar arasında senkronize edin"
+          title={i18n.t("settings.dataSection.cloudTitle")}
+          subtitle={i18n.t("settings.dataSection.cloudSubtitle")}
         />
         <DataCard
           icon="download"
           iconBg={C.surfaceContainer}
           iconColor={C.secondary}
-          title="Kayıtları Dışa Aktar"
-          subtitle="Namaz geçmişinizi PDF olarak indirin"
+          title={i18n.t("settings.dataSection.exportTitle")}
+          subtitle={i18n.t("settings.dataSection.exportSubtitle")}
         />
       </View>
     </View>

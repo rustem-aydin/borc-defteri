@@ -20,6 +20,8 @@ import Svg, { G, Line, Rect, Text as SvgText } from "react-native-svg";
 
 const AnimatedRect = Animated.createAnimatedComponent(Rect);
 
+type ViewInstance = React.ComponentRef<typeof View>;
+
 const TOOLTIP_WIDTH = 160;
 const TOOLTIP_GAP = 6;
 
@@ -99,10 +101,10 @@ function BarTrigger({
 }: {
   item: any;
   barWidth: number;
-  onOpen: (ref: React.RefObject<View | null>, item: any) => void;
+  onOpen: (ref: React.RefObject<ViewInstance | null>, item: any) => void;
 }) {
   const styles = useStyles();
-  const ref = useRef<View | null>(null);
+  const ref = useRef<ViewInstance | null>(null);
   return (
     <View ref={ref} collapsable={false} style={styles.triggerWrapper}>
       <Pressable
@@ -114,7 +116,19 @@ function BarTrigger({
 }
 
 // ─── Ana Bileşen ────────────────────────────────────────────────────────────
-export function StackedBarChart({ data }: { data: any[] }) {
+export type ChartSegment = { vakit: string; c: string; h: number };
+export type ChartDatum = {
+  day: string;
+  val: string;
+  color: string;
+  segments: ChartSegment[];
+};
+
+interface StackedBarChartProps {
+  data: ChartDatum[];
+}
+
+export function StackedBarChart({ data }: StackedBarChartProps) {
   const styles = useStyles();
   const { colors: C } = useTheme();
 
@@ -163,7 +177,7 @@ export function StackedBarChart({ data }: { data: any[] }) {
     if (width > 0) setContainerWidth(width);
   };
 
-  const handleOpen = (ref: React.RefObject<View | null>, item: any) => {
+  const handleOpen = (ref: React.RefObject<ViewInstance | null>, item: any) => {
     ref.current?.measureInWindow((x, y, w, h) => {
       setTooltipAnchor({ x, y, width: w, height: h });
       setTooltipItem(item);

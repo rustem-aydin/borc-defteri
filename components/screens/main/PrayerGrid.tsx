@@ -3,10 +3,12 @@ import { usePrayersQuery, usePushUpdate } from "@/hooks/usePrayersQuery";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useEffect, useState } from "react";
 import { DeviceEventEmitter, StyleSheet, View } from "react-native";
+import { useMadhab } from "@/hooks/useMadhab";
 import { VITR_ENABLED_KEY } from "../settings/VitrSection";
 import { PrayerCard } from "./PrayerCard";
 
 export function PrayerGrid() {
+  const { madhab } = useMadhab();
   const [vitrEnabled, setVitrEnabled] = useState(true);
 
   useEffect(() => {
@@ -21,21 +23,13 @@ export function PrayerGrid() {
     return () => subscription.remove();
   }, []);
 
-  const { data, refetch } = usePrayersQuery();
+  const { data } = usePrayersQuery();
   const pushUpdate = usePushUpdate();
   const prayers = data?.prayers ?? [];
 
-  useEffect(() => {
-    const subscription = DeviceEventEmitter.addListener(
-      "PrayersUpdated",
-      () => {
-        refetch();
-      },
-    );
-    return () => subscription.remove();
-  }, [refetch]);
-
-  const visiblePrayers = vitrEnabled
+  // Vitir yalnızca Hanefi'de borçtur; ayar kapalıysa da gizlenir.
+  const showVitir = vitrEnabled && madhab === "hanefi";
+  const visiblePrayers = showVitir
     ? prayers
     : prayers.filter((prayer) => prayer.vakit_id !== "vitir");
 
@@ -51,12 +45,12 @@ export function PrayerGrid() {
             title={meta.label}
             color={meta.color}
             image={meta.image}
-            onDecrement={() =>
-              pushUpdate(prayer.vakit_id, prayer.kalan_sayi, -1)
-            }
-            onIncrement={() =>
-              pushUpdate(prayer.vakit_id, prayer.kalan_sayi, +1)
-            }
+            onDecrement={() => {
+              void pushUpdate(prayer.vakit_id, -1);
+            }}
+            onIncrement={() => {
+              void pushUpdate(prayer.vakit_id, +1);
+            }}
           />
         );
       })}

@@ -1,7 +1,8 @@
 import { makeStyles } from "@/hooks/make-styles";
+import type { HistoryLog } from "@/hooks/useHistoryQuery";
 import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { Image, Text, View } from "react-native";
 
@@ -14,34 +15,39 @@ const VAKIT_IMAGES: Record<string, any> = {
   vitir: require("@/assets/times/vitr.png"),
 };
 
-export interface HistoryLog {
-  id: number;
-  tarih: string;
-  islem: number;
-  vakit_id: string;
+const VAKIT_LABELS: Record<string, string> = {
+  sabah: i18n.t("diger.vakitler.sabah"),
+  ogle: i18n.t("diger.vakitler.ogle"),
+  ikindi: i18n.t("diger.vakitler.ikindi"),
+  aksam: i18n.t("diger.vakitler.aksam"),
+  yatsi: i18n.t("diger.vakitler.yatsi"),
+  vitir: i18n.t("diger.vakitler.vitir"),
+};
+
+export type { HistoryLog };
+
+function formatTime(dateStr: string) {
+  return new Date(dateStr).toLocaleTimeString("tr-TR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
 }
 
-export function ActivityItem({ item }: { item: HistoryLog }) {
+interface ActivityItemProps {
+  item: HistoryLog;
+  isFirst?: boolean;
+  isLast?: boolean;
+}
+
+export function ActivityItem({
+  item,
+  isFirst = false,
+  isLast = false,
+}: ActivityItemProps) {
   const styles = useStyles();
   const { isDark } = useTheme();
 
   const isKildim = item.islem < 0;
-
-  const VAKIT_LABELS: Record<string, string> = {
-    sabah: i18n.t("diger.vakitler.sabah"),
-    ogle: i18n.t("diger.vakitler.ogle"),
-    ikindi: i18n.t("diger.vakitler.ikindi"),
-    aksam: i18n.t("diger.vakitler.aksam"),
-    yatsi: i18n.t("diger.vakitler.yatsi"),
-    vitir: i18n.t("diger.vakitler.vitir"),
-  };
-  const formatTime = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.toLocaleTimeString("tr-TR", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  };
 
   const successColor = isDark ? "#4ade80" : "#166534";
   const errorColor = isDark ? "#fb923c" : "#9a3412";
@@ -49,7 +55,13 @@ export function ActivityItem({ item }: { item: HistoryLog }) {
   const errorBg = isDark ? "#2c1503" : "#FFF7ED";
 
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        isFirst && styles.rowFirst,
+        isLast && styles.rowLast,
+      ]}
+    >
       <View style={styles.leftSide}>
         <View
           style={[
@@ -101,16 +113,33 @@ export function ActivityItem({ item }: { item: HistoryLog }) {
   );
 }
 
-// ... styles aynı kalır
 const useStyles = makeStyles((C) => ({
+  // Kartın gövdesi satır bazında çizilir: FlashList satırları tek tek
+  // sanallaştırabilsin diye gün grubu tek hücreye sıkıştırılmaz.
   container: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     paddingVertical: 14,
+    paddingHorizontal: 16,
     backgroundColor: C.surfaceContainerLowest,
+    borderColor: C.outlineVariant,
+    borderLeftWidth: 1,
+    borderRightWidth: 1,
     borderBottomWidth: 1,
     borderBottomColor: C.surfaceContainerHigh,
+  },
+  rowFirst: {
+    borderTopWidth: 1,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: 18,
+  },
+  rowLast: {
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    borderBottomColor: C.outlineVariant,
+    paddingBottom: 18,
   },
   leftSide: {
     flexDirection: "row",
@@ -128,7 +157,6 @@ const useStyles = makeStyles((C) => ({
     width: 46,
     height: 46,
     backgroundColor: C.surfaceContainerLowest,
-
     resizeMode: "contain",
   },
   infoContainer: {

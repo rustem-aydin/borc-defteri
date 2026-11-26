@@ -1,7 +1,7 @@
 import { makeStyles } from "@/hooks/make-styles";
-import { changeLanguage, deviceLanguage } from "@/lib/i18n";
+import { changeLanguage, deviceLanguage, i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React, { useState } from "react";
 import { Modal, Pressable, Text, TouchableOpacity, View } from "react-native";
 
@@ -35,7 +35,7 @@ export function LanguageSection() {
     <View style={styles.container}>
       <View style={styles.sectionHeader}>
         <MaterialIcons name="language" size={22} color={C.primary} />
-        <Text style={styles.sectionTitle}>Dil</Text>
+        <Text style={styles.sectionTitle}>{i18n.t("settings.language")}</Text>
       </View>
 
       <View style={styles.card}>
@@ -54,7 +54,9 @@ export function LanguageSection() {
               <Text style={rowStyles.flag}>{currentLang.flag}</Text>
             </View>
             <View style={rowStyles.textWrap}>
-              <Text style={rowStyles.title}>Uygulama Dili</Text>
+              <Text style={rowStyles.title}>
+                {i18n.t("settings.languageSection.appLanguage")}
+              </Text>
               <Text style={rowStyles.subtitle}>{currentLang.label}</Text>
             </View>
           </View>
@@ -84,7 +86,7 @@ export function LanguageSection() {
           >
             <View style={styles.sheetHeader}>
               <Text style={[styles.sheetTitle, { color: C.onSurface }]}>
-                Dil Seçin
+                {i18n.t("settings.languageSection.select")}
               </Text>
               <TouchableOpacity onPress={() => setModalVisible(false)}>
                 <MaterialIcons

@@ -1,6 +1,8 @@
 import { Gender, Tab } from "@/constants/colors";
 import { PRAYER_KEYS } from "@/lib/db";
+import { PRAYERS_KEY } from "@/hooks/usePrayersQuery";
 import { i18n } from "@/lib/i18n";
+import { useQueryClient } from "@tanstack/react-query";
 import { useSQLiteContext } from "expo-sqlite";
 import { useState } from "react";
 import { Alert } from "react-native";
@@ -84,8 +86,16 @@ export function calculate(params: {
 
 // ─── Hook ──────────────────────────────────────────────────────────
 
-export function useKazaForm(onSaved?: () => void) {
+export function useKazaForm(
+  onSaved?: () => void,
+  options: { vitrEnabled?: boolean } = {},
+) {
+  const vitrEnabled = options.vitrEnabled ?? true;
+  const activeKeys = vitrEnabled
+    ? PRAYER_KEYS
+    : PRAYER_KEYS.filter((k) => k !== "vitir");
   const db = useSQLiteContext();
+  const queryClient = useQueryClient();
 
   const [activeTab, setActiveTab] = useState<Tab>("auto");
   const [loading, setSaving] = useState(false);
@@ -117,7 +127,9 @@ export function useKazaForm(onSaved?: () => void) {
 
     await db.withTransactionAsync(async () => {
       for (const key of PRAYER_KEYS) {
-        const val = counts[key] ?? 0;
+        // Mezhep vitri borç saymıyorsa (Şafii) her zaman 0 yazılır.
+        const val =
+          key === "vitir" && !vitrEnabled ? 0 : (counts[key] ?? 0);
 
         // Varsa üzerine yaz (kalan_sayi = excluded.kalan_sayi), yoksa ekle.
         await db.runAsync(
@@ -136,6 +148,16 @@ export function useKazaForm(onSaved?: () => void) {
         }
       }
     });
+
+    // Kalan borç, haftalık grafik, son işlem ve geçmiş aynı kaynaktan beslenir.
+    // Yalnız bu dört sorgu tazelenir; anahtarsız invalidate alakasız sorguları da
+    // yeniden çalıştırıyordu.
+    await Promise.all([
+      queryClient.invalidateQueries({ queryKey: PRAYERS_KEY }),
+      queryClient.invalidateQueries({ queryKey: ["weeklyHistory"] }),
+      queryClient.invalidateQueries({ queryKey: ["lastPrayer"] }),
+      queryClient.invalidateQueries({ queryKey: ["history"] }),
+    ]);
   }
 
   function validateManualCounts(counts: Record<string, number>): { valid: boolean; error?: string } {
@@ -184,6 +206,7 @@ export function useKazaForm(onSaved?: () => void) {
           regularPrayerDate: rd,
           monthlyHayzDays: parseInt(monthlyHayz) || 0,
           totalNifasDays: parseInt(totalNifas) || 0,
+          vitrEnabled,
         });
 
         await persistToDb(result);
@@ -197,7 +220,7 @@ export function useKazaForm(onSaved?: () => void) {
       } else {
         // Manual
         const counts: Record<string, number> = {};
-        for (const key of PRAYER_KEYS) {
+        for (const key of activeKeys) {
           counts[key] = parseInt(manual[key as keyof ManualCounts]) || 0;
         }
 

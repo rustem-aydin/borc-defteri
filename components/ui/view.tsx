@@ -1,7 +1,7 @@
-import { forwardRef } from 'react';
+import { ComponentRef, forwardRef } from 'react';
 import { View as RNView, type ViewProps } from 'react-native';
 
-export const View = forwardRef<RNView, ViewProps>(
+export const View = forwardRef<ComponentRef<typeof RNView>, ViewProps>(
   ({ style, ...otherProps }, ref) => {
     return (
       <RNView
@@ -12,3 +12,5 @@ export const View = forwardRef<RNView, ViewProps>(
     );
   }
 );
+
+View.displayName = 'View';

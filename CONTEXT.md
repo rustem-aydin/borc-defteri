@@ -29,7 +29,7 @@ Kullanıcının kendine koyduğu günlük veya haftalık kaza kılma sayısı. S
 _Avoid_: goal, quota, streak
 
 **Mezhep**:
-İslami fıkhi ekol. Hesaplama her zaman Hanefi kurallarına göre yapılır. Info ekranındaki dört mezhep içeriği (Hanefi, Şafii, Maliki, Hanbeli) yalnızca bilgilendirme amaçlıdır.
+Kullanıcının fıkhi ekolü. İki seçenek vardır: Hanefi ve Şafii. Kullanıcı ilk kurulumda mezhebini seçer; info ekranı yalnızca seçilen mezhebin içeriğini gösterir, seçim ayarlardan değiştirilebilir. Kaza borcu hesabı her zaman Hanefi kurallarına göre yapılır.
 _Avoid_: madhab, sect, school
 
 **Dil**:

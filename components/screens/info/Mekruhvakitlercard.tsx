@@ -1,4 +1,4 @@
-import { TabInfoProps } from "@/constants/colors";
+import { MadhabProps } from "@/constants/colors";
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import React from "react";
@@ -171,7 +171,7 @@ function SunArc({ C }: { C: any }) {
         fill={C.onSurfaceVariant}
         fontWeight="500"
       >
-        Doğuş
+        {i18n.t("info.kerahatArc.dogus")}
       </SvgText>
       <SvgText
         x="180"
@@ -181,7 +181,7 @@ function SunArc({ C }: { C: any }) {
         fill={C.onSurfaceVariant}
         fontWeight="500"
       >
-        İstivaʼ (öğle)
+        {i18n.t("info.kerahatArc.istiva")}
       </SvgText>
       <SvgText
         x="340"
@@ -191,13 +191,13 @@ function SunArc({ C }: { C: any }) {
         fill={C.onSurfaceVariant}
         fontWeight="500"
       >
-        Batış
+        {i18n.t("info.kerahatArc.batis")}
       </SvgText>
     </Svg>
   );
 }
 
-export function MekruhVakitlerCard({ mezhep = "hanefi" }: TabInfoProps) {
+export function MekruhVakitlerCard({ mezhep = "hanefi" }: MadhabProps) {
   const styles = useStyles();
   const prefix = `info.${mezhep}.kerahat`;
 

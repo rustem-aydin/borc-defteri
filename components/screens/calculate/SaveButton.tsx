@@ -1,9 +1,9 @@
 import { C } from "@/constants/colors";
+import { i18n } from "@/lib/i18n";
 import React, { useRef, useState } from "react";
 import {
   ActivityIndicator,
   Animated,
-  DeviceEventEmitter,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,14 +13,12 @@ interface Props {
   label: string;
   onPress: () => Promise<void> | void;
   loading?: boolean;
-  eventName?: string;
 }
 
 export default function SaveButton({
   label,
   onPress,
   loading: externalLoading = false,
-  eventName = "PrayersUpdated",
 }: Props) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
   const [internalLoading, setInternalLoading] = useState(false);
@@ -49,7 +47,6 @@ export default function SaveButton({
     setInternalLoading(true);
     try {
       await onPress();
-      DeviceEventEmitter.emit(eventName);
     } catch (error) {
       console.error("SaveButton error:", error);
     } finally {
@@ -76,9 +73,7 @@ export default function SaveButton({
           </>
         )}
       </TouchableOpacity>
-      <Text style={styles.note}>
-        Hesaplama sonuçları profilinize otomatik olarak kaydedilecektir.
-      </Text>
+      <Text style={styles.note}>{i18n.t("calculation.autoSaveNote")}</Text>
     </Animated.View>
   );
 }

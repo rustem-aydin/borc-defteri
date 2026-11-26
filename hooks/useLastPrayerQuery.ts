@@ -1,8 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useSQLiteContext } from "expo-sqlite";
 
-interface HistoryLog {
-  id: number;
+interface LastPrayerRow {
   tarih: string;
   islem: number;
   vakit_id: string;
@@ -21,8 +20,8 @@ export function useLastPrayerQuery(labels: LastPrayerLabels) {
   return useQuery({
     queryKey: ["lastPrayer"],
     queryFn: async () => {
-      const last = await db.getFirstAsync<HistoryLog>(
-        "SELECT * FROM history_logs ORDER BY tarih DESC LIMIT 1",
+      const last = await db.getFirstAsync<LastPrayerRow>(
+        "SELECT tarih, islem, vakit_id FROM history_logs ORDER BY tarih DESC LIMIT 1",
       );
       if (!last) return "—";
 

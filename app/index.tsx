@@ -1,6 +1,7 @@
 // app/index.tsx
 import { hasPin } from "@/lib/auth";
 import { i18n } from "@/lib/i18n";
+import { hasSeenOnboarding, markOnboardingSeen } from "@/lib/onboarding";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getLocales } from "expo-localization";
 import { Redirect } from "expo-router";
@@ -8,12 +9,9 @@ import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect, useState } from "react";
 import { AppState } from "react-native";
 
-// Splash screen'in otomatik gizlenmesini engelle
-SplashScreen.preventAutoHideAsync();
-
 export default function Index() {
   const [redirect, setRedirect] = useState<
-    "/home" | "/pin/setup" | "/pin/unlock" | null
+    "/onboarding" | "/home" | "/pin/setup" | "/pin/unlock" | null
   >(null);
   const [isAppReady, setIsAppReady] = useState(false);
 
@@ -23,13 +21,26 @@ export default function Index() {
         // Dil ayarını hemen yap
         i18n.locale = getLocales()[0].languageCode ?? "en";
 
-        // Auth kontrolü
-        const exists = await hasPin();
-        const protectionEnabled = await AsyncStorage.getItem(
-          "pinProtectionEnabled",
-        );
+        // Auth kontrolü — okumalar paralel yapılır.
+        const [exists, protectionEnabled, seenOnboarding] = await Promise.all([
+          hasPin(),
+          AsyncStorage.getItem("pinProtectionEnabled"),
+          hasSeenOnboarding(),
+        ]);
         const isEnabled =
           protectionEnabled === null ? true : protectionEnabled === "true";
+
+        // Daha önce kurulmuş bir uygulama (PIN veya koruma ayarı var) tanıtımı
+        // atlar; yalnızca gerçek ilk açılışta gösterilir.
+        const isExistingUser = exists || protectionEnabled !== null;
+        if (!seenOnboarding) {
+          if (isExistingUser) {
+            await markOnboardingSeen();
+          } else {
+            setRedirect("/onboarding");
+            return;
+          }
+        }
 
         if (exists && isEnabled) {
           setRedirect("/pin/unlock");

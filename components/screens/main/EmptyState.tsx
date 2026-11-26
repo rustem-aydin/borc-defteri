@@ -1,5 +1,7 @@
 import { makeStyles } from "@/hooks/make-styles";
-import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
+import { i18n } from "@/lib/i18n";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import { Pressable, Text, View } from "react-native";
@@ -44,11 +46,8 @@ const SpiritualIllustration = ({ styles }: { styles: any }) => {
 const TypographyGroup = ({ styles }: { styles: any }) => {
   return (
     <View style={styles.textContainer}>
-      <Text style={styles.title}>Yeni Bir Başlangıç Yapın</Text>
-      <Text style={styles.subtitle}>
-        Henüz hesaplanmış kaza namazınız bulunmuyor. Hemen hesaplayarak
-        başlayın.
-      </Text>
+      <Text style={styles.title}>{i18n.t("home.emptyState.title")}</Text>
+      <Text style={styles.subtitle}>{i18n.t("home.emptyState.subtitle")}</Text>
     </View>
   );
 };
@@ -75,12 +74,14 @@ const ActionButtons = ({
           size={24}
           color={styles._colors.onPrimary}
         />
-        <Text style={styles.primaryButtonText}>Kaza Namazlarımı Hesapla</Text>
+        <Text style={styles.primaryButtonText}>
+          {i18n.t("home.emptyState.calculate")}
+        </Text>
       </Pressable>
 
       <Pressable style={styles.secondaryButton} onPress={onPressGuide}>
         <Text style={styles.secondaryButtonText}>
-          Nasıl çalışır? Rehberi görüntüle
+          {i18n.t("home.emptyState.guide")}
         </Text>
         <MaterialIcons
           name="arrow-outward"

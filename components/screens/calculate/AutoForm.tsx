@@ -1,5 +1,6 @@
 import { C, Gender } from "@/constants/colors";
 import { makeStyles } from "@/hooks/make-styles";
+import { useMadhab } from "@/hooks/useMadhab";
 import { i18n } from "@/lib/i18n";
 import React from "react";
 import { Text, TextInput, View } from "react-native";
@@ -37,6 +38,7 @@ export default function AutoForm({
   setTotalNifas,
 }: Props) {
   const styles = useStyles();
+  const { madhab } = useMadhab();
 
   return (
     <View style={styles.wrapper}>
@@ -70,7 +72,7 @@ export default function AutoForm({
               {i18n.t(`autoForm.ageOfPuberty`)}
             </Text>
             <Text style={styles.infoHint}>
-              {i18n.t(`autoForm.pubertyHint`)}
+              {i18n.t(`autoForm.pubertyHint.${madhab}`)}
             </Text>
           </View>
           <TextInput

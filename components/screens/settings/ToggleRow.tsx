@@ -1,5 +1,5 @@
 import { C } from "@/constants/colors";
-import { MaterialIcons } from "@expo/vector-icons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React from "react";
 import { StyleSheet, Switch, Text, View } from "react-native";
 

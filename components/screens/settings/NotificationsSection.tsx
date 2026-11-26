@@ -1,13 +1,20 @@
 import { makeStyles } from "@/hooks/make-styles";
 import { i18n } from "@/lib/i18n";
 import { useTheme } from "@/lib/ThemeContext";
-import { MaterialIcons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  cancelReminders,
+  defaultReminderTime,
+  ensureNotificationPermission,
+  loadReminderSettings,
+  saveReminderSettings,
+  scheduleDailyReminder,
+} from "@/lib/notifications";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import * as Notifications from "expo-notifications";
 import React, { useEffect, useState } from "react";
 import {
   Alert,
+  Linking,
   Modal,
   Platform,
   Pressable,
@@ -16,18 +23,6 @@ import {
   View,
 } from "react-native";
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldShowAlert: true,
-    shouldPlaySound: true,
-    shouldSetBadge: false,
-    shouldShowBanner: true,
-    shouldShowList: true,
-  }),
-});
-
-const STORAGE_KEY_TIME = "@reminder_time";
-const STORAGE_KEY_ENABLED = "@reminder_enabled";
 
 export function NotificationsSection() {
   const styles = useStyles();
@@ -35,90 +30,90 @@ export function NotificationsSection() {
   const { colors: C } = useTheme();
 
   const [remindersEnabled, setRemindersEnabled] = useState(false);
-  const [reminderTime, setReminderTime] = useState(new Date());
+  const [reminderTime, setReminderTime] = useState<Date>(defaultReminderTime());
   const [showPicker, setShowPicker] = useState(false);
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    loadSettings();
-    requestPermissions();
+    let active = true;
+    loadReminderSettings()
+      .then((settings) => {
+        if (!active) return;
+        setRemindersEnabled(settings.enabled);
+        setReminderTime(settings.time);
+      })
+      .catch((error) => console.warn("Hatırlatıcı ayarları okunamadı", error));
+    return () => {
+      active = false;
+    };
   }, []);
 
-  const requestPermissions = async () => {
-    const { status } = await Notifications.getPermissionsAsync();
-    if (status !== "granted") {
-      await Notifications.requestPermissionsAsync();
-    }
-  };
+  const persist = (enabled: boolean, time: Date) =>
+    saveReminderSettings({ enabled, time });
 
-  const loadSettings = async () => {
+  const toggleSwitch = async (value: boolean) => {
+    if (saving) return;
+    setSaving(true);
     try {
-      const storedTime = await AsyncStorage.getItem(STORAGE_KEY_TIME);
-      const storedEnabled = await AsyncStorage.getItem(STORAGE_KEY_ENABLED);
-      if (storedTime) setReminderTime(new Date(storedTime));
-      if (storedEnabled !== null)
-        setRemindersEnabled(JSON.parse(storedEnabled));
-    } catch (e) {
-      console.log("Ayarlar yüklenemedi", e);
-    }
-  };
+      if (value) {
+        // İzin yalnızca kullanıcı açıkça açtığında istenir.
+        const granted = await ensureNotificationPermission();
+        if (!granted) {
+          Alert.alert(
+            i18n.t("notifications.permissionDenied"),
+            i18n.t("notifications.permissionDeniedMessage"),
+            [
+              { text: i18n.t("notifications.cancel"), style: "cancel" },
+              {
+                text: i18n.t("notifications.openSettings"),
+                onPress: () => Linking.openSettings(),
+              },
+            ],
+          );
+          return;
+        }
 
-  const scheduleDailyNotification = async (date: Date) => {
-    try {
-      await Notifications.cancelAllScheduledNotificationsAsync();
-      let trigger: Notifications.NotificationTriggerInput;
-      if (Platform.OS === "ios") {
-        trigger = {
-          type: Notifications.SchedulableTriggerInputTypes.CALENDAR,
-          hour: date.getHours(),
-          minute: date.getMinutes(),
-          repeats: true,
-        };
+        await scheduleDailyReminder(reminderTime);
+        setRemindersEnabled(true);
+        await persist(true, reminderTime);
+        Alert.alert(
+          i18n.t("notifications.activated"),
+          i18n.t("notifications.activatedMessage", {
+            time: formatTime(reminderTime),
+          }),
+        );
       } else {
-        trigger = {
-          type: Notifications.SchedulableTriggerInputTypes.DAILY,
-          hour: date.getHours(),
-          minute: date.getMinutes(),
-        };
+        await cancelReminders();
+        setRemindersEnabled(false);
+        await persist(false, reminderTime);
       }
-      await Notifications.scheduleNotificationAsync({
-        content: {
-          title: i18n.t(`notifications.notifTitle`),
-          body: i18n.t(`notifications.notifBody`),
-          sound: true,
-        },
-        trigger,
-      });
     } catch (error) {
-      console.error("Bildirim ayarlanırken hata oluştu:", error);
-    }
-  };
-
-  const toggleSwitch = async (value: any) => {
-    setRemindersEnabled(value);
-    await AsyncStorage.setItem(STORAGE_KEY_ENABLED, JSON.stringify(value));
-    if (value) {
-      await scheduleDailyNotification(reminderTime);
+      console.warn("Hatırlatıcı güncellenemedi", error);
       Alert.alert(
-        i18n.t(`notifications.activated`),
-        i18n.t(`notifications.activatedMessage`, {
-          time: formatTime(reminderTime),
-        }),
+        i18n.t("notifications.error"),
+        i18n.t("notifications.errorMessage"),
       );
-    } else {
-      await Notifications.cancelAllScheduledNotificationsAsync();
+    } finally {
+      setSaving(false);
     }
   };
 
-  const handleTimeChange = async (event: any, selectedDate: any) => {
+  const handleTimeChange = async (_event: unknown, selectedDate?: Date) => {
     if (Platform.OS === "android") setShowPicker(false);
-    if (selectedDate) {
-      setReminderTime(selectedDate);
-      await AsyncStorage.setItem(STORAGE_KEY_TIME, selectedDate.toISOString());
-      if (remindersEnabled) await scheduleDailyNotification(selectedDate);
+    if (!selectedDate) return;
+
+    setReminderTime(selectedDate);
+    await persist(remindersEnabled, selectedDate);
+    if (remindersEnabled) {
+      try {
+        await scheduleDailyReminder(selectedDate);
+      } catch (error) {
+        console.warn("Hatırlatıcı saati güncellenemedi", error);
+      }
     }
   };
 
-  const formatTime = (date: any) => {
+  const formatTime = (date: Date) => {
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
     return `${hours}:${minutes}`;
@@ -158,6 +153,7 @@ export function NotificationsSection() {
           <Switch
             value={remindersEnabled}
             onValueChange={toggleSwitch}
+            disabled={saving}
             trackColor={{ false: C.surfaceContainerHighest, true: C.primary }}
             thumbColor={C.surfaceContainerLowest}
             ios_backgroundColor={C.surfaceContainerHighest}

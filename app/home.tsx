@@ -4,31 +4,34 @@ import HomeContent from "@/components/screens/main/HomeContent";
 import { HomeHeader } from "@/components/screens/main/HomeHeader";
 import { HomeSkeleton } from "@/components/screens/main/HomeSkeleton";
 import { makeStyles } from "@/hooks/make-styles";
+import { useMadhab } from "@/hooks/useMadhab";
 import { usePrayersQuery } from "@/hooks/usePrayersQuery";
 import { useTheme } from "@/lib/ThemeContext";
 import { formatDateRange, getEndOfWeek, getStartOfWeek } from "@/lib/utils";
 import { router } from "expo-router";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { DeviceEventEmitter, StatusBar, View } from "react-native";
+import { StatusBar } from "expo-status-bar";
+import { useCallback, useMemo, useState } from "react";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   const styles = useStyles();
   const { isDark } = useTheme();
-  const { data, isLoading, refetch } = usePrayersQuery();
-  const totalDebt = data?.totalDebt ?? 0;
+  const { data, isLoading } = usePrayersQuery();
+  const { madhab } = useMadhab();
+  // Şafii'de vitir sünnet olduğu için toplam borca katılmaz.
+  const totalDebt = useMemo(() => {
+    const rows = data?.prayers ?? [];
+    return rows.reduce(
+      (acc, row) =>
+        madhab === "safii" && row.vakit_id === "vitir"
+          ? acc
+          : acc + row.kalan_sayi,
+      0,
+    );
+  }, [data, madhab]);
 
   const [viewDate, setViewDate] = useState(new Date());
-
-  useEffect(() => {
-    const subscription = DeviceEventEmitter.addListener(
-      "PrayersUpdated",
-      () => {
-        refetch();
-      },
-    );
-    return () => subscription.remove();
-  }, [refetch]);
 
   const weekData = useMemo(() => {
     const startOfWeek = getStartOfWeek(viewDate);
@@ -51,11 +54,19 @@ export default function HomeScreen() {
   }, [viewDate]);
 
   const handlePrevWeek = useCallback(() => {
-    setViewDate((d) => new Date(d.setDate(d.getDate() - 7)));
+    setViewDate((d) => {
+      const next = new Date(d);
+      next.setDate(next.getDate() - 7);
+      return next;
+    });
   }, []);
 
   const handleNextWeek = useCallback(() => {
-    setViewDate((d) => new Date(d.setDate(d.getDate() + 7)));
+    setViewDate((d) => {
+      const next = new Date(d);
+      next.setDate(next.getDate() + 7);
+      return next;
+    });
   }, []);
 
   const handleCalculatePress = useCallback(() => {
@@ -64,10 +75,7 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        barStyle={isDark ? "light-content" : "dark-content"}
-        translucent={false}
-      />
+      <StatusBar style={isDark ? "light" : "dark"} />
       <HomeHeader />
 
       {isLoading ? (
